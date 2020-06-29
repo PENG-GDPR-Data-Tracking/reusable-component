@@ -1,1 +1,0 @@
-Created with `npx express-generator-typescript "base-api"` 
