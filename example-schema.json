@@ -4,20 +4,20 @@
   "title": "Person",
   "type": "object",
   "properties": {
-    "firstName": {
+    "name": {
       "type": "string",
-      "description": "The person's first name.",
-      "gdpr-data-type": "",
-      "gdpr-anonymous-when": []
-    },
-    "lastName": {
-      "type": "string",
-      "description": "The person's last name."
+      "description": "The person's name.",
+      "gdpr-data-type": "explicit_identifier",
+      "gdpr-necessity": "So we can refer to you by name",
+      "examples": ["Max Mustermann"]
     },
     "age": {
       "description": "Age in years which must be equal to or greater than zero.",
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "gdpr-data-type": "quasi_identifier",
+      "gdpr-necessity": "So we can check your maturity.",
+      "examples": ["26"]
     }
   }
 }
