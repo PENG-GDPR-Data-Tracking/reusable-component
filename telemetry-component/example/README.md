@@ -23,6 +23,7 @@ npm install
 ```
 
 Setup [Zipkin Tracing](https://zipkin.io/pages/quickstart.html)
+`docker run -d -p 9411:9411 openzipkin/zipkin`
 or
 Setup [Jaeger Tracing](https://www.jaegertracing.io/docs/latest/getting-started/#all-in-one)
 
