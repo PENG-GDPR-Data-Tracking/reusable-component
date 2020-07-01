@@ -29,38 +29,43 @@ module.exports = (configuration) => {
         },
         applyCustomAttributesOnSpan: (span, request, response) => {
           console.log('tracer.js', 'applyCustomAttributesOnSpan');
-          if (request.headers && request.headers['gdpr']) {
-            span.setAttribute('gdpr.reason', request.headers['gdpr']);
-          }
-          span.setAttribute(
-            'gdpr.ttl',
-            request.headers && request.headers['gdpr.ttl'] ? request.headers['gdpr.ttl'] : configuration.baseTTL
-          );
-          span.setAttribute(
-            'gdpr.legalBasis',
-            request.headers && request.headers['gdpr.legalBasis']
-              ? request.headers['gdpr.legalBasis']
-              : configuration.baseLegalBasis
-          );
-          span.setAttribute(
-            'gdpr.legitimateInterest',
-            request.headers && request.headers['gdpr.legitimateInterest']
-              ? request.headers['gdpr.legitimateInterest']
-              : configuration.baseLegitimateInterest
-          );
-          span.setAttribute(
-            'gdpr.automatedDecisionMaking',
-            request.headers && request.headers['gdpr.automatedDecisionMaking']
-              ? request.headers['gdpr.automatedDecisionMaking']
-              : configuration.baseAutomatedDecisionMaking
-          );
-          span.setAttribute(
-            'gdpr.purpose',
-            request.headers && request.headers['gdpr.purpose']
-              ? request.headers['gdpr.purpose']
-              : configuration.basePurpose
-          );
+
+          // we set location no matter what
           span.setAttribute('gdpr.location', configuration.location);
+
+          // we override configuration's headers if the request provides us with corresponding values
+          if (request.headers) {
+            span.setAttribute(
+              'gdpr.ttl',
+              request.headers['gdpr.ttl']
+                ? request.headers['gdpr.ttl']
+                : configuration.baseTTL
+            );
+            span.setAttribute(
+              'gdpr.legalBasis',
+              request.headers['gdpr.legalBasis']
+                ? request.headers['gdpr.legalBasis']
+                : configuration.baseLegalBasis
+            );
+            span.setAttribute(
+              'gdpr.legitimateInterest',
+              request.headers['gdpr.legitimateInterest']
+                ? request.headers['gdpr.legitimateInterest']
+                : configuration.baseLegitimateInterest
+            );
+            span.setAttribute(
+              'gdpr.automatedDecisionMaking',
+              request.headers['gdpr.automatedDecisionMaking']
+                ? request.headers['gdpr.automatedDecisionMaking']
+                : configuration.baseAutomatedDecisionMaking
+            );
+            span.setAttribute(
+              'gdpr.purpose',
+              request.headers['gdpr.purpose']
+                ? request.headers['gdpr.purpose']
+                : configuration.basePurpose
+            );
+          }
         },
       },
     },
