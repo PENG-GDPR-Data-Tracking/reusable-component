@@ -38,23 +38,27 @@ module.exports = (configuration) => {
           );
           span.setAttribute(
             'gdpr.legalBasis',
-            request.headers['gdpr.legalBasis'] ? request.headers['gdpr.legalBasis'] : configuration.baseLegalBasis
+            request.headers && request.headers['gdpr.legalBasis']
+              ? request.headers['gdpr.legalBasis']
+              : configuration.baseLegalBasis
           );
           span.setAttribute(
             'gdpr.legitimateInterest',
-            request.headers['gdpr.legitimateInterest']
+            request.headers && request.headers['gdpr.legitimateInterest']
               ? request.headers['gdpr.legitimateInterest']
               : configuration.baseLegitimateInterest
           );
           span.setAttribute(
             'gdpr.automatedDecisionMaking',
-            request.headers['gdpr.automatedDecisionMaking']
+            request.headers && request.headers['gdpr.automatedDecisionMaking']
               ? request.headers['gdpr.automatedDecisionMaking']
               : configuration.baseAutomatedDecisionMaking
           );
           span.setAttribute(
             'gdpr.purpose',
-            request.headers['gdpr.purpose'] ? request.headers['gdpr.purpose'] : configuration.basePurpose
+            request.headers && request.headers['gdpr.purpose']
+              ? request.headers['gdpr.purpose']
+              : configuration.basePurpose
           );
           span.setAttribute('gdpr.location', configuration.location);
         },
