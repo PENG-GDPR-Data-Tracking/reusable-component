@@ -4,6 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Get API from: https://editor.swagger.io/ and https://zipkin.io/zipkin-api/#/
 
+# What does it do?
+
+This service gathers all
+
+From OpenAPI Schema:
+
+- Get description for data attribute
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

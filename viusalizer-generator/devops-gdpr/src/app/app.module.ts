@@ -7,27 +7,32 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { HttpClientModule } from '@angular/common/http';
 import { Configuration, ConfigurationParameters } from './zipkin/configuration';
 import { ApiModule } from './zipkin';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ConnectionDetailDialogComponent } from './dialog/connection-detail-dialog/connection-detail-dialog.component';
 
-export function apiConfigFactory(): Configuration  {
+export function apiConfigFactory(): Configuration {
   const params: ConfigurationParameters = {
-
     // set configuration parameters here.
   };
   return new Configuration(params);
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, ConnectionDetailDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxGraphModule,
     ApiModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
+  entryComponents: [ConnectionDetailDialogComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
