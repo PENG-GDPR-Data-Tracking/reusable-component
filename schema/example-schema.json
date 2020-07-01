@@ -1,22 +1,23 @@
 {
   "$id": "https://example.com/person.schema.json",
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "./peng.meta.schema.json",
   "title": "Person",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
       "description": "The person's name.",
-      "gdpr-data-type": "explicit_identifier",
-      "gdpr-necessity": "So we can refer to you by name",
+      "gdprDataType": "identifier",
+      "gdprReason": "So we can refer to you by name",
+      "gdprCategory": "personal",
       "examples": ["Max Mustermann"]
     },
     "age": {
       "description": "Age in years which must be equal to or greater than zero.",
       "type": "integer",
       "minimum": 0,
-      "gdpr-data-type": "quasi_identifier",
-      "gdpr-necessity": "So we can check your maturity.",
+      "gdprDataType": "quasi-identifier",
+      "gdprReason": "So we can check your maturity.",
       "examples": ["26"]
     }
   }

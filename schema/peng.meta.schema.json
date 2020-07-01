@@ -1,5 +1,5 @@
 {
-    "$schema": "https://tu-berlin.de/insertURL/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/meta/core",
     "$id": "https://tu-berlin.de/insertURL/meta",
     "$vocabulary": {
         "https://json-schema.org/draft/2019-09/vocab/core": true,
@@ -10,6 +10,7 @@
         "https://json-schema.org/draft/2019-09/vocab/content": true
     },
     "$recursiveAnchor": true,
+
     "title": "meta schema extension introducing GDPR tags",
     "type": ["object", "boolean"],
     "properties": {
@@ -19,12 +20,20 @@
             "$comment": "Non-empty fragments not allowed.",
             "pattern": "^[^#]*#?$"
         },
-		"$gdprReason": {
+		"gdprReason": {
             "type": "string"
         },
-        "$gdprDataType": {
+        "gdprDataType": {
             "type": "string",
 			"propertyNames": {"enum": ["identifier", "quasi-identifier", "sensitive", "non-sensitive"]}
+        },
+        "gdprCategory": {
+            "type": "string",
+            "propertyNames": {"enum": ["special", "personal", "anonymous"]}
+        },
+        "gdprNotProvidedConsequence": {
+            "type": "string"
         }
-    }
+    },
+    "required": ["gdprReason", "gdprDataType", "gdprCategory"]
 }
