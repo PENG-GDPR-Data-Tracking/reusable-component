@@ -1,6 +1,10 @@
 'use strict';
 
-const tracer = require('./tracer')('second-server');
+const tracer = require('./tracer')({
+  serviceName: 'database',
+  baseTTL: 3600,
+  location: 'Europe',
+});
 // eslint-disable-next-line import/order
 const http = require('http');
 
@@ -34,4 +38,4 @@ function handleRequest(request, response) {
   }
 }
 
-startServer(8888);
+startServer(8081);

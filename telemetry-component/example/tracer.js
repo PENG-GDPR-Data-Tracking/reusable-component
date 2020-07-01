@@ -8,7 +8,13 @@ const { ZipkinExporter } = require('@opentelemetry/exporter-zipkin');
 
 const EXPORTER = process.env.EXPORTER || '';
 
-module.exports = (serviceName) => {
+module.exports = (configuration) => {
+  // configuration has:
+  // {
+  //   serviceName: "",
+  //   baseTTL: 0,
+  //   location: ""
+  // }
   const provider = new NodeTracerProvider({
     plugins: {
       http: {
@@ -18,24 +24,28 @@ module.exports = (serviceName) => {
           //console.log(request);
         },
         applyCustomAttributesOnSpan: (span, request, response) => {
-          console.log("he")
-          if(request.headers && request.headers["gdpr"]){
-            span.setAttribute("gdpr.reason", request.headers["gdpr"])
+          console.log('he');
+          if (request.headers && request.headers['gdpr']) {
+            span.setAttribute('gdpr.reason', request.headers['gdpr']);
           }
-          span.setAttribute("test", "foo")
-        }
-      }
-    }
+          span.setAttribute(
+            'gdpr.ttl',
+            request.headers && request.headers['gdpr.ttl'] ? request.headers['gdpr'] : configuration.baseTTL
+          );
+          span.setAttribute('gdpr.location', configuration.location);
+        },
+      },
+    },
   });
 
   let exporter;
   if (EXPORTER.toLowerCase().startsWith('z')) {
     exporter = new ZipkinExporter({
-      serviceName,
+      serviceName: configuration.serviceName,
     });
   } else {
     exporter = new JaegerExporter({
-      serviceName,
+      serviceName: configuration.serviceName,
     });
   }
 

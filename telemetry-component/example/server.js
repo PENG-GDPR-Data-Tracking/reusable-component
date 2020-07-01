@@ -1,6 +1,10 @@
 'use strict';
 
-const tracer = require('./tracer')('example-http-server');
+const tracer = require('./tracer')({
+  serviceName: 'middleware',
+  baseTTL: 0,
+  location: 'Europe',
+});
 // eslint-disable-next-line import/order
 const http = require('http');
 
@@ -24,14 +28,19 @@ function handleRequest(request, response) {
     request.on('error', (err) => console.log(err));
     request.on('data', (chunk) => body.push(chunk));
     request.on('end', () => {
-      http.get("http://localhost:8888", {
-        headers: {
-          "GDPR": "Because, why not?"
+      http.get(
+        'http://localhost:8081',
+        {
+          headers: {
+            GDPR: 'Because, why not?',
+            'GDPR-TTL': '1min',
+          },
+        },
+        (res) => {
+          console.log(res.body);
+          response.end('Hello World!');
         }
-      }, (res) => {
-        console.log(res.body)
-        response.end('Hello World!');
-      })
+      );
     });
   } catch (err) {
     console.error(err);
