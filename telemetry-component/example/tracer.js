@@ -28,7 +28,7 @@ module.exports = (configuration) => {
           //console.log(request);
         },
         applyCustomAttributesOnSpan: (span, request, response) => {
-          console.log('he');
+          console.log('tracer.js', 'applyCustomAttributesOnSpan');
           if (request.headers && request.headers['gdpr']) {
             span.setAttribute('gdpr.reason', request.headers['gdpr']);
           }

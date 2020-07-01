@@ -41,8 +41,8 @@ function handleRequest(request, response) {
           },
         },
         (res) => {
-          console.log(res.body);
-          response.end('Hello World!');
+          console.log('res.body:', res.body);
+          response.end('I am the server1!');
         }
       );
     });
