@@ -1,6 +1,7 @@
-<h2 mat-dialog-title>Connection Details</h2>
+<h2 mat-dialog-title>Connection Details: {{data.span.name}}</h2>
 <mat-dialog-content>
-
+    <p *ngIf="data.span.tags['gdpr.reason']">Reason: {{ data.span.tags['gdpr.reason'] }}</p>
+    <p *ngIf="data.span.tags['gdpr.ttl']">TTL: {{ data.span.tags['gdpr.ttl'] }}</p>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>

@@ -40,20 +40,26 @@ export class AppComponent {
       });
 
     api
-      .traceTraceIdGet('2c315a44c7088dcd0772746b270376b0', 'response')
+      .traceTraceIdGet('b327a1c96dbcb301e624d6b5dbc9bd51', 'response')
       .subscribe((ans) => {
         let json = ans.body;
 
         let set = new Set(json.map((span) => span.localEndpoint.serviceName));
         let services = Array.from(set);
         this.nodes = services.map((service) => {
+          let serviceSpans = json.filter(
+            (s) => s.localEndpoint.serviceName === service
+          );
+          if (serviceSpans.length > 1) {
+            serviceSpans = serviceSpans.filter((s) => s.kind === 'SERVER');
+          }
           return {
             id: service,
             label: service,
             data: {
-              location: json.filter(
-                (s) => s.localEndpoint.serviceName === service
-              )[0].tags['gdpr.location'],
+              location: serviceSpans[0].tags['gdpr.location'],
+              purpose: serviceSpans[0].tags['gdpr.purpose'],
+              legalBasis: serviceSpans[0].tags['gdpr.legalBasis'],
             },
           };
         });
@@ -62,14 +68,13 @@ export class AppComponent {
         json.forEach((span) => {
           if (span.parentId) {
             let edge = {
-              id: span.id,
+              id: 'span' + span.id,
               target: span.localEndpoint.serviceName,
               source: json.filter((s) => s.id == span.parentId)[0].localEndpoint
                 .serviceName,
               label: 'connection',
               data: {
-                reason: span.tags['gdpr.reason'],
-                ttl: span.tags['gdpr.ttl'],
+                span,
               },
             };
             if (span.localEndpoint.serviceName != edge.source) {
@@ -84,7 +89,7 @@ export class AppComponent {
 
   openDialog(edge: any): void {
     const dialogRef = this.dialog.open(ConnectionDetailDialogComponent, {
-      data: { connection: edge },
+      data: { ...edge },
     });
 
     dialogRef.afterClosed().subscribe((result) => {});

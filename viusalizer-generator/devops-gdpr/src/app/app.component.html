@@ -17,6 +17,8 @@
         </rect>
         <text x="5" y="20" text-anchor="start">{{ node.label}}</text>
         <text x="5" y="40" text-anchor="start"> Location: {{node.data.location}}</text>
+        <text x="5" y="60" text-anchor="start"> Purpose: {{node.data.purpose}}</text>
+        <text x="5" y="80" text-anchor="start"> Legal Basis: {{node.data.legalBasis}}</text>
       </g>
 
       <!-- <g fill="#000000" fill-opacity="0" stroke="green" stroke-width="5">
@@ -41,10 +43,9 @@
       <svg:path class="line" stroke-width="2" marker-end="url(#arrow)">
       </svg:path>
     </svg:g>
-    <svg:g class="linkMidpoint" *ngIf="link.midPoint" (click)="openDialog(link)"
+    <svg:g class="linkMidpoint" *ngIf="link.midPoint" (click)="openDialog(link.data)"
       [attr.transform]="'translate(' + (link.midPoint.x) + ',' + (link.midPoint.y) + ')'">
-      <svg:text y="0" alignment-baseline="central" *ngIf="link.data.reason">Reason: {{ link.data.reason}}</svg:text>
-      <svg:text y="20" alignment-baseline="central" *ngIf="link.data.ttl">TTL: {{ link.data.ttl}}</svg:text>
+      <svg:text y="0" alignment-baseline="central" *ngIf="link.data.span">{{ link.data.span.name}}</svg:text>
     </svg:g>
   </ng-template>
 </ngx-graph>
