@@ -6,6 +6,7 @@ import { Edge, Node } from '@swimlane/ngx-graph';
 import * as shape from 'd3-shape';
 import { ConnectionDetailDialogComponent } from './dialog/connection-detail-dialog/connection-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ServerDetailDialogComponent } from './dialog/server-detail-dialog/server-detail-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -90,6 +91,14 @@ export class AppComponent {
   openDialog(edge: any): void {
     const dialogRef = this.dialog.open(ConnectionDetailDialogComponent, {
       data: { ...edge },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  openServerDialog(node: any): void {
+    const dialogRef = this.dialog.open(ServerDetailDialogComponent, {
+      data: { ...node },
     });
 
     dialogRef.afterClosed().subscribe((result) => {});

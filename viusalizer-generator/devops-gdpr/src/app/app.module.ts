@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConnectionDetailDialogComponent } from './dialog/connection-detail-dialog/connection-detail-dialog.component';
+import { ServerDetailDialogComponent } from './dialog/server-detail-dialog/server-detail-dialog.component';
 
 export function apiConfigFactory(): Configuration {
   const params: ConfigurationParameters = {
@@ -20,7 +21,11 @@ export function apiConfigFactory(): Configuration {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConnectionDetailDialogComponent],
+  declarations: [
+    AppComponent,
+    ConnectionDetailDialogComponent,
+    ServerDetailDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +36,10 @@ export function apiConfigFactory(): Configuration {
     MatDialogModule,
     MatButtonModule,
   ],
-  entryComponents: [ConnectionDetailDialogComponent],
+  entryComponents: [
+    ConnectionDetailDialogComponent,
+    ServerDetailDialogComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

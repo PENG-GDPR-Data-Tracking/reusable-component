@@ -1,4 +1,6 @@
-<ngx-graph class="chart-container" [view]="[1200, 1200]" layout="dagre" [curve]="curve" [links]="edges" [nodes]="nodes">
+<button mat-button>Generate Privacy Policy</button>
+
+<ngx-graph class="chart-container" [view]="[1000, 1000]" layout="dagre" [curve]="curve" [links]="edges" [nodes]="nodes">
 
   <ng-template #defsTemplate>
     <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4"
@@ -10,7 +12,7 @@
   <ng-template #nodeTemplate let-node>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
       style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-      viewBox="0 0 140 100" width="140" height="100">
+      viewBox="0 0 140 100" width="140" height="100" (click)="openServerDialog(node)">
       <g>
         <rect style="fill:url(#toning);stroke:#010101;stroke-width:1.6871;stroke-miterlimit:10;" cx="0" cy="0"
           width="140" height="100">
