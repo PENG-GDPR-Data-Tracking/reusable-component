@@ -27,6 +27,7 @@ function startServer(port) {
 
 /** A function which handles requests and send response. */
 function handleRequest(request, response) {
+  console.log('server.js handleRequest', request.body)
   try {
     const body = [];
     request.on('error', (err) => console.log(err));

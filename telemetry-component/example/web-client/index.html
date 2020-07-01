@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenTelemetry Client</title>
+</head>
+
+<body>
+  <button onclick="call(`api/profile/me`)">api/profile/me</button>
+  <p id="log"></p>
+
+  <script>
+    let counter = 0;
+
+    
+    const call = url => {
+      const callCounter = counter++;
+      document.querySelector('#log').innerHTML += `Call id:${callCounter}, ${url}<br>`;
+
+      // Using fetch: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+      fetch(url)
+      // fetch(url, { mode: 'no-cors' })
+        .then(res => {
+          document.querySelector('#log').innerHTML += `Response id:${callCounter}, ${url}<br>`;
+        })
+    }
+
+  </script>
+</body>
+
+</html>

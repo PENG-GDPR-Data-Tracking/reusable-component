@@ -24,9 +24,9 @@ module.exports = (configuration) => {
       http: {
         enabled: true,
         path: '@opentelemetry/plugin-http',
-        requestHook: (span, request) => {
-          //console.log(request);
-        },
+        // requestHook: (span, request) => {
+        //   //console.log(request);
+        // },
         applyCustomAttributesOnSpan: (span, request, response) => {
           console.log('tracer.js', 'applyCustomAttributesOnSpan');
 
@@ -72,14 +72,12 @@ module.exports = (configuration) => {
   });
 
   let exporter;
+  const EXPORTER_CONFIG = { serviceName: configuration.serviceName };
+
   if (EXPORTER.toLowerCase().startsWith('z')) {
-    exporter = new ZipkinExporter({
-      serviceName: configuration.serviceName,
-    });
+    exporter = new ZipkinExporter(EXPORTER_CONFIG);
   } else {
-    exporter = new JaegerExporter({
-      serviceName: configuration.serviceName,
-    });
+    exporter = new JaegerExporter(EXPORTER_CONFIG);
   }
 
   provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
