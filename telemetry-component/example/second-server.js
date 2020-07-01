@@ -4,6 +4,10 @@ const tracer = require('./tracer')({
   serviceName: 'database',
   baseTTL: 3600,
   location: 'Europe',
+  baseLegalBasis: 'Contractual',
+  baseLegitimateInterest: '',
+  baseAutomatedDecisionMaking: false,
+  basePurpose: 'Database for storing your data',
 });
 // eslint-disable-next-line import/order
 const http = require('http');

@@ -4,6 +4,10 @@ const tracer = require('./tracer')({
   serviceName: 'client',
   baseTTL: 0,
   location: 'User Location',
+  baseLegalBasis: 'Contractual',
+  baseLegitimateInterest: '',
+  baseAutomatedDecisionMaking: false,
+  basePurpose: 'The WebApp you can interact with',
 });
 // eslint-disable-next-line import/order
 const http = require('http');
@@ -14,7 +18,7 @@ function makeRequest() {
     {
       host: 'localhost',
       port: 8080,
-      path: '/helloworld',
+      path: '/api/profile/me',
     },
     (response) => {
       const body = [];

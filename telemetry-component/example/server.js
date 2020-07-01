@@ -4,6 +4,10 @@ const tracer = require('./tracer')({
   serviceName: 'middleware',
   baseTTL: 0,
   location: 'Europe',
+  baseLegalBasis: 'Contractual',
+  baseLegitimateInterest: '',
+  baseAutomatedDecisionMaking: false,
+  basePurpose: 'Service for providing our WebApp',
 });
 // eslint-disable-next-line import/order
 const http = require('http');
@@ -29,11 +33,11 @@ function handleRequest(request, response) {
     request.on('data', (chunk) => body.push(chunk));
     request.on('end', () => {
       http.get(
-        'http://localhost:8081',
+        'http://localhost:8081/api/user/45',
         {
           headers: {
-            GDPR: 'Because, why not?',
-            'GDPR-TTL': '1min',
+            gdpr: 'Because, why not?',
+            'gdpr.ttl': '1',
           },
         },
         (res) => {
