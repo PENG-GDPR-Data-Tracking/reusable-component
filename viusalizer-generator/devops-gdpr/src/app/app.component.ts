@@ -61,6 +61,7 @@ export class AppComponent {
               location: serviceSpans[0].tags['gdpr.location'],
               purpose: serviceSpans[0].tags['gdpr.purpose'],
               legalBasis: serviceSpans[0].tags['gdpr.legalBasis'],
+              span: serviceSpans[0],
             },
           };
         });
