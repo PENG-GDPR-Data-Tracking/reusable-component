@@ -38,7 +38,7 @@
                         "type": "string",
                         "format": "date"
                       },
-                      "gdprDataType": {
+                      "x-gdprDataType": {
                         "type": "string",
                         "enum": [
                           "identifier",
@@ -48,7 +48,7 @@
                         ],
                         "default": "quasi-identifier"
                       },
-                      "gdprCategory": {
+                      "x-gdprCategory": {
                         "type": "string",
                         "enum": [
                           "special",
@@ -57,7 +57,7 @@
                         ],
                         "default": "personal"
                       },
-                      "gdprNotProvidedConsequence": {
+                      "x-gdprNotProvidedConsequence": {
                         "type": "string",
                         "default": "User identification not possible"
                       }
