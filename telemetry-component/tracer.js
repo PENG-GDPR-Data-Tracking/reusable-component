@@ -33,8 +33,8 @@ module.exports = (configuration) => {
           // we set location no matter what
           span.setAttribute('gdpr.location', configuration.location);
 
-          // we override configuration's headers if the request provides us with corresponding values
           if (request.headers) {
+            // we override configuration's headers if the request provides us with corresponding values
             span.setAttribute(
               'gdpr.ttl',
               request.headers['gdpr.ttl']
