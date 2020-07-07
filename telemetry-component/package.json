@@ -7,6 +7,8 @@
   "scripts": {
     "zipkin:server": "cross-env EXPORTER=zipkin node ./server.js",
     "zipkin:server2": "cross-env EXPORTER=zipkin node ./second-server.js",
+    "zipkin:webclient": "cross-env EXPORTER=zipkin nodemon web-client",
+    "start": "concurrently --kill-others \"npm run zipkin:server\" \"npm run zipkin:server2\" \"npm run zipkin:webclient\"",
     "zipkin:client": "cross-env EXPORTER=zipkin node ./client.js",
     "jaeger:server": "cross-env EXPORTER=jaeger node ./server.js",
     "jaeger:client": "cross-env EXPORTER=jaeger node ./client.js"
@@ -33,11 +35,15 @@
     "@opentelemetry/exporter-jaeger": "^0.9.0",
     "@opentelemetry/exporter-zipkin": "^0.9.0",
     "@opentelemetry/node": "^0.9.0",
+    "@opentelemetry/plugin-express": "^0.8.0",
     "@opentelemetry/plugin-http": "^0.9.0",
-    "@opentelemetry/tracing": "^0.9.0"
+    "@opentelemetry/tracing": "^0.9.0",
+    "express": "^4.17.1"
   },
   "homepage": "https://github.com/open-telemetry/opentelemetry-js#readme",
   "devDependencies": {
-    "cross-env": "^6.0.0"
+    "concurrently": "^5.2.0",
+    "cross-env": "^6.0.0",
+    "nodemon": "^2.0.4"
   }
 }

@@ -34,7 +34,7 @@ function handleRequest(request, response) {
     request.on('end', () => {
       // deliberately sleeping to mock some action.
       setTimeout(() => {
-        response.end('Bla World!');
+        response.end('I am the server2!');
       }, 2000);
     });
   } catch (err) {
