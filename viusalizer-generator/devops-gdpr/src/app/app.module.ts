@@ -12,6 +12,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConnectionDetailDialogComponent } from './dialog/connection-detail-dialog/connection-detail-dialog.component';
 import { ServerDetailDialogComponent } from './dialog/server-detail-dialog/server-detail-dialog.component';
+import { PolicySnippetsComponent } from './pages/policy-snippets/policy-snippets.component';
+import { VisualizerComponent } from './pages/visualizer/visualizer.component';
+import { MaterialModule } from './material-module';
 
 export function apiConfigFactory(): Configuration {
   const params: ConfigurationParameters = {
@@ -25,6 +28,8 @@ export function apiConfigFactory(): Configuration {
     AppComponent,
     ConnectionDetailDialogComponent,
     ServerDetailDialogComponent,
+    PolicySnippetsComponent,
+    VisualizerComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,8 +38,7 @@ export function apiConfigFactory(): Configuration {
     ApiModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
+    MaterialModule,
   ],
   entryComponents: [
     ConnectionDetailDialogComponent,

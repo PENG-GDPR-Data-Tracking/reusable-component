@@ -1,0 +1,25 @@
+<!-- <p>{{entities | json}}</p> -->
+
+<p>Special Categories of Data</p>
+
+<div *ngFor="let entity of entities">
+    <p>{{entity.title}}</p>
+
+
+</div>
+
+<p>Personal Data</p>
+
+<div *ngFor="let entity of entities">
+    <p>{{entity.title}}</p>
+
+    <li *ngFor="let property of getProperties(entity.properties)">{{property}} (
+        {{entity.properties[property].description}})</li>
+</div>
+
+
+<p>Anonymous Data</p>
+
+<div *ngFor="let entity of entities">
+    <p>{{entity.title}}</p>
+</div>

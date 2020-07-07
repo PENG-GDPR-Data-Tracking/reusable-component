@@ -3,7 +3,8 @@
     <p *ngIf="data.data.location">Location: {{ data.data.location }}</p>
     <p *ngIf="data.data.purpose">Purpose: {{data.data.purpose}}</p>
     <p *ngIf="data.data.legalBasis"> Legal Basis: {{data.data.legalBasis}}</p>
-    <p>OpenAPI Link</p>
+    <p><a [href]="data.data.span.tags['http.url'] + '/swagger/openapi.json'">OpenAPI Link:
+            {{data.data.span.tags['http.url'] + '/swagger/openapi.json'}}</a></p>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>

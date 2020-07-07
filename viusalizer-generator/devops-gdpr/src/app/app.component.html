@@ -1,53 +1,8 @@
-<button mat-button>Generate Privacy Policy</button>
+<mat-toolbar>
+    <button mat-button [routerLink]="['/policy-snippets']">Generate Privacy Policy Snippets</button>
+    <button mat-button [routerLink]="['/visualizer']">Show visualizer</button>
+</mat-toolbar>
 
-<ngx-graph class="chart-container" [view]="[1000, 1000]" layout="dagre" [curve]="curve" [links]="edges" [nodes]="nodes">
 
-  <ng-template #defsTemplate>
-    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4"
-      orient="auto-start-reverse">
-      <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
-    </svg:marker>
-  </ng-template>
-  <!-- [attr.transform]="node.transform"      attr.transform-origin="50% 50%" -->
-  <ng-template #nodeTemplate let-node>
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
-      style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-      viewBox="0 0 140 100" width="140" height="100" (click)="openServerDialog(node)">
-      <g>
-        <rect style="fill:url(#toning);stroke:#010101;stroke-width:1.6871;stroke-miterlimit:10;" cx="0" cy="0"
-          width="140" height="100">
-        </rect>
-        <text x="5" y="20" text-anchor="start">{{ node.label}}</text>
-        <text x="5" y="40" text-anchor="start"> Location: {{node.data.location}}</text>
-        <text x="5" y="60" text-anchor="start"> Purpose: {{node.data.purpose}}</text>
-        <text x="5" y="80" text-anchor="start"> Legal Basis: {{node.data.legalBasis}}</text>
-      </g>
 
-      <!-- <g fill="#000000" fill-opacity="0" stroke="green" stroke-width="5">
-        <circle cx="50" cy="50" r="50" />
-      </g>
-      <g>
-        <svg:text alignment-baseline="central"> </svg:text>
-        <svg:text alignment-baseline="central">Location: {{ node.data.location}}</svg:text>
-      </g> -->
-      <!-- <svg:foreignObject width="100" height="100">
-        <xhtml:div class="cardContainer" xmlns="http://www.w3.org/1999/xhtml">
-          <label class="name">{{node.label}}</label>
-          <label class="name">Location: {{node.data.location}}</label>
-
-        </xhtml:div>
-      </svg:foreignObject> -->
-    </svg>
-  </ng-template>
-
-  <ng-template #linkTemplate let-link>
-    <svg:g class="edge">
-      <svg:path class="line" stroke-width="2" marker-end="url(#arrow)">
-      </svg:path>
-    </svg:g>
-    <svg:g class="linkMidpoint" *ngIf="link.midPoint" (click)="openDialog(link.data)"
-      [attr.transform]="'translate(' + (link.midPoint.x) + ',' + (link.midPoint.y) + ')'">
-      <svg:text y="0" alignment-baseline="central" *ngIf="link.data.span">{{ link.data.span.name}}</svg:text>
-    </svg:g>
-  </ng-template>
-</ngx-graph>
+<router-outlet></router-outlet>
