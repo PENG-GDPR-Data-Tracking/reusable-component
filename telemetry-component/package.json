@@ -7,7 +7,8 @@
   "scripts": {
     "zipkin:server": "cross-env EXPORTER=zipkin node ./server.js",
     "zipkin:server2": "cross-env EXPORTER=zipkin node ./second-server.js",
-    "start": "concurrently --kill-others \"npm run zipkin:server\" \"npm run zipkin:server2\" \"nodemon web-client\"",
+    "zipkin:webclient": "cross-env EXPORTER=zipkin nodemon web-client",
+    "start": "concurrently --kill-others \"npm run zipkin:server\" \"npm run zipkin:server2\" \"npm run zipkin:webclient\"",
     "zipkin:client": "cross-env EXPORTER=zipkin node ./client.js",
     "jaeger:server": "cross-env EXPORTER=jaeger node ./server.js",
     "jaeger:client": "cross-env EXPORTER=jaeger node ./client.js"
