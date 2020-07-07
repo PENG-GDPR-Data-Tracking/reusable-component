@@ -1,9 +1,22 @@
 const http = require('http');
-const express = require('express')
-const app = express()
-const port = 3000
 
-app.use(express.static('web-client'))
+const tracer = require('../tracer')({
+  serviceName: 'webserver',
+  baseTTL: 0,
+  location: 'Europe',
+  baseLegalBasis: 'Contractual',
+  baseLegitimateInterest: '',
+  baseAutomatedDecisionMaking: false,
+  basePurpose: 'Webserver for providing our WebApp',
+});
+
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+
+app.use(express.static('web-client'));
 app.get('/api/profile/me', (req, res) =>
 
   // we forward the request from the express web-server to server1

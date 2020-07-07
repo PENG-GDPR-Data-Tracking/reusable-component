@@ -8,7 +8,7 @@ const { ZipkinExporter } = require('@opentelemetry/exporter-zipkin');
 
 const EXPORTER = process.env.EXPORTER || '';
 
-module.exports = (configuration) => {
+module.exports = configuration => {
   // configuration has:
   // {
   //   serviceName: "",
@@ -21,6 +21,11 @@ module.exports = (configuration) => {
   // }
   const provider = new NodeTracerProvider({
     plugins: {
+      express: {
+        enabled: true,
+        // You may use a package name or absolute path to the file.
+        path: '@opentelemetry/plugin-express',
+      },
       http: {
         enabled: true,
         path: '@opentelemetry/plugin-http',
@@ -28,7 +33,7 @@ module.exports = (configuration) => {
         //   //console.log(request);
         // },
         applyCustomAttributesOnSpan: (span, request, response) => {
-          console.log('tracer.js', 'applyCustomAttributesOnSpan');
+          console.log('tracer.js', 'applyCustomAttributesOnSpan, serviceName:', configuration.serviceName);
 
           // we set location no matter what
           span.setAttribute('gdpr.location', configuration.location);
