@@ -1,18 +1,23 @@
 const http = require('http');
+import { tracing } from '../opentelemerty';
 
-const tracer = require('../opentelemerty')({
-  serviceName: 'webserver',
-  baseTTL: 0,
+const SERVICE_NAME = 'client-1';
+const SERVICE_PORT = 3000;
+const SERVICE_GDPR_TRACING_CONFIG = {
+  serviceName: SERVICE_NAME,
   location: 'Europe',
+  baseTTL: 0,
   baseLegalBasis: 'Contractual',
   baseLegitimateInterest: '',
   baseAutomatedDecisionMaking: false,
   basePurpose: 'Webserver for providing our WebApp',
-});
+};
 
-const express = require('express');
+tracing(SERVICE_GDPR_TRACING_CONFIG);
+
+import express from "express"
 const app = express();
-const port = 3000;
+const port = SERVICE_PORT;
 
 app.use(express.static('src/client-1'));
 app.get('/api/profile/me', (req, res) =>
