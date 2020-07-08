@@ -1,3 +1,5 @@
+># THIS README IS DEPRECATED and must be updated
+
 # Overview
 
 > Copied from https://github.com/open-telemetry/opentelemetry-js/tree/master/examples/http
