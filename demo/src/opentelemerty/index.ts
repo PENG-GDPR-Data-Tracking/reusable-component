@@ -3,7 +3,7 @@ const { NodeTracerProvider } = require('@opentelemetry/node');
 const { SimpleSpanProcessor } = require('@opentelemetry/tracing');
 const { ZipkinExporter } = require('@opentelemetry/exporter-zipkin');
 
-import { GdprTelemetry, GdprTelemetryConfiguration } from '../../../telemetry-component'
+import { GdprTelemetry, GdprTelemetryConfiguration } from '../../../telemetry-component';
 
 export const tracing = (configuration: GdprTelemetryConfiguration) => {
   const provider = new NodeTracerProvider({
@@ -13,7 +13,10 @@ export const tracing = (configuration: GdprTelemetryConfiguration) => {
       http: {
         enabled: true,
         path: '@opentelemetry/plugin-http',
-        ...GdprTelemetry(configuration)
+        ...GdprTelemetry(configuration),
+        config: {
+          ignoreIncomingPaths: [/\/swagger/],
+        },
       },
     },
   });

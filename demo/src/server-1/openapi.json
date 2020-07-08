@@ -50,41 +50,35 @@
     "schemas": {
       "User": {
         "title": "User",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "type": "object",
+        "x-gdpr-data-type": "personal",
         "properties": {
           "name": {
             "type": "string",
-            "description": "The logical operation this span represents in lowercase (e.g. rpc method).\nLeave absent if unknown.\n\nAs these are lookup labels, take care to ensure names are low cardinality.\nFor example, do not embed variables into the name.\n"
+            "description": "The name of the User"
           },
           "id": {
             "maxLength": 16,
             "minLength": 16,
             "pattern": "[a-f0-9]{16}",
             "type": "string",
-            "description": "Unique 64bit identifier for this operation within the trace.\n\nEncoded as 16 lowercase hex characters. For example ffdc9bb9a6453df3\n"
+            "description": "Unique 64bit identifier. For example ffdc9bb9a6453df3\n"
           },
           "kind": {
             "type": "string",
             "description": "When present, kind clarifies timestamp, duration and remoteEndpoint. When\nabsent, the span is local or incomplete. Unlike client and server, there\nis no direct critical path latency relationship between producer and\nconsumer spans.\n",
-            "enum": [
-              "CLIENT",
-              "SERVER",
-              "PRODUCER",
-              "CONSUMER"
-            ]
+            "enum": ["CLIENT", "SERVER", "PRODUCER", "CONSUMER"]
           },
           "signUpDate": {
             "type": "integer",
-            "description": "Epoch microseconds of the start of this span, possibly absent if\nincomplete.\n\nFor example, 1502787600000000 corresponds to 2017-08-15 09:00 UTC\n\nThis value should be set directly by instrumentation, using the most\nprecise value possible. For example, gettimeofday or multiplying epoch\nmillis by 1000.\n\nThere are three known edge-cases where this could be reported absent.\n * A span was allocated but never started (ex not yet received a timestamp)\n * The span's start event was lost\n * Data about a completed span (ex tags) were sent after the fact\n",
+            "description": "The date you signed up to our service.",
             "format": "int64"
           },
           "duration": {
             "minimum": 1,
             "type": "integer",
-            "description": "Duration in **microseconds** of the critical path, if known. Durations of less\nthan one are rounded up. Duration of children can be longer than their\nparents due to asynchronous operations.\n\nFor example 150 milliseconds is 150000 microseconds.\n",
+            "description": "what ever",
             "format": "int64"
           }
         },

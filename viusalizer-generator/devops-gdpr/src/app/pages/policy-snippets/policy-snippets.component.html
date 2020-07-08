@@ -2,7 +2,7 @@
 
 <p>Special Categories of Data</p>
 
-<div *ngFor="let entity of entities">
+<div *ngFor="let entity of specialEntities">
     <p>{{entity.title}}</p>
 
 
@@ -10,7 +10,7 @@
 
 <p>Personal Data</p>
 
-<div *ngFor="let entity of entities">
+<div *ngFor="let entity of personalEntities">
     <p>{{entity.title}}</p>
 
     <li *ngFor="let property of getProperties(entity.properties)">{{property}} (
@@ -20,6 +20,6 @@
 
 <p>Anonymous Data</p>
 
-<div *ngFor="let entity of entities">
+<div *ngFor="let entity of anonymousEntities">
     <p>{{entity.title}}</p>
 </div>

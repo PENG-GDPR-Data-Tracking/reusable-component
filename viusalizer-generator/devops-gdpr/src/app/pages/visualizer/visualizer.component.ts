@@ -41,7 +41,7 @@ export class VisualizerComponent {
         null,
         null,
         null,
-        null,
+        40000,
         null,
         new Date().getTime(),
         90000000,
@@ -53,11 +53,16 @@ export class VisualizerComponent {
         let analyzeSpans = this.traces[0].filter(
           (span) => span.kind === 'CLIENT' || span.kind === 'SERVER'
         );
-        this.appState.endpoints = analyzeSpans.map(
-          (span) => span.tags['http.url']
+        this.appState.endpoints = analyzeSpans.map((span) =>
+          this.getHostFromURL(span.tags['http.url'])
         );
         this.getEdgesAndNodesFromSpan(analyzeSpans);
       });
+  }
+
+  private getHostFromURL(url: string) {
+    let split = new RegExp('^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?(.*)$').exec(url);
+    return split[1] + '//' + split[2] + split[3];
   }
 
   private getEdgesAndNodesFromSpan(json: Trace) {

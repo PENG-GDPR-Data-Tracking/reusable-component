@@ -11,9 +11,9 @@ import { AppStateService } from 'src/app/app-state.service';
   styleUrls: ['./policy-snippets.component.scss'],
 })
 export class PolicySnippetsComponent implements OnInit {
-  entities;
-  personal;
-  anonymous;
+  specialEntities;
+  personalEntities;
+  anonymousEntities;
 
   constructor(
     private httpClient: HttpClient,
@@ -25,11 +25,14 @@ export class PolicySnippetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllPolicies([
-      'http://localhost:4200/assets/openapi.json',
-      ...this.appState.endpoints,
-    ]).subscribe((documents) => {
-      this.entities = documents.reduce((accumulator, currentDoc) => {
+    this.getAllPolicies(
+      Array.from(
+        new Set([
+          ...this.appState.endpoints.map((e) => e + '/swagger/openapi.json'),
+        ])
+      )
+    ).subscribe((documents) => {
+      this.personalEntities = documents.reduce((accumulator, currentDoc) => {
         return [...accumulator, ...this.getEntitiesFromSchema(currentDoc)];
       }, []);
     });
