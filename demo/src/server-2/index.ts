@@ -29,6 +29,11 @@ app.get("/swagger/openapi.json", (req, res) => {
   res.send(readFileSync(path.resolve(__dirname + '/openapi.json'), "utf-8"))
 });
 
+app.get('*', (req, res) => {
+  console.log('server2 got request', req.path);
+  res.send(`Hello world from ${SERVICE_NAME}`);
+});
+
 // start the Express server
 app.listen(port, () => {
   console.log(`${SERVICE_NAME} started at http://localhost:${port}`);

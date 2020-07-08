@@ -1,4 +1,3 @@
-const http = require('http');
 import { tracing } from '../opentelemerty';
 
 const SERVICE_NAME = 'client-1';
@@ -16,11 +15,12 @@ const SERVICE_GDPR_TRACING_CONFIG = {
 tracing(SERVICE_GDPR_TRACING_CONFIG);
 
 import express from "express"
+import http from 'http';
 const app = express();
 const port = SERVICE_PORT;
 
 app.use(express.static('src/client-1'));
-app.get('/api/profile/me', (req, res) =>
+app.get('*', (req, res) =>
 
   // we forward the request from the express web-server to server1
   // node will respond to the request as soon as the response from the other server comes  
@@ -28,15 +28,15 @@ app.get('/api/profile/me', (req, res) =>
     {
       host: 'localhost',
       port: 8080,
-      path: '/api/profile/me',
+      path: req.path,
     },
     response => {
       // console.log('web-server:', 'server1 responded with', response)
       const body = [];
       response.on('data', chunk => body.push(chunk));
       response.on('end', () => {
-        // console.log(body.toString());
-        res.status(200).send('Hello World!');
+        console.log(`response that ${SERVICE_NAME} got:`, body.toString());
+        res.status(200).send(body.toString());
       });
     }
   ));
