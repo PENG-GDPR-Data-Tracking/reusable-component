@@ -41,4 +41,6 @@ app.get('/api/profile/me', (req, res) =>
     }
   ));
 
-app.listen(port, () => console.log(`Client listening at http://localhost:${port}`))
+app.listen(port, () => {
+  console.log(`${SERVICE_NAME} started at http://localhost:${port}`);
+});

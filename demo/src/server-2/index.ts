@@ -31,5 +31,5 @@ app.get("/swagger/openapi.json", (req, res) => {
 
 // start the Express server
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
+  console.log(`${SERVICE_NAME} started at http://localhost:${port}`);
 });
