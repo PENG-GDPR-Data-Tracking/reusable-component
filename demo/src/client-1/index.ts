@@ -35,7 +35,6 @@ app.get('*', (req, res) =>
       const body = [];
       response.on('data', (chunk) => body.push(chunk));
       response.on('end', () => {
-        console.log(`response that ${SERVICE_NAME} got:`, body.toString());
         res.status(200).send(body.toString());
       });
     }
