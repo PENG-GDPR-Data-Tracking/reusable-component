@@ -8,10 +8,8 @@ import { GdprTelemetry, GdprTelemetryConfiguration } from '../../../telemetry-co
 export const tracing = (configuration: GdprTelemetryConfiguration) => {
   const provider = new NodeTracerProvider({
     plugins: {
-      express: {
-        enabled: true,
-        path: '@opentelemetry/plugin-express',
-      },
+      // using the express plugin here does not really works
+      // but the @opentracing/plugin-express must still be installed if the node app uses express
       http: {
         enabled: true,
         path: '@opentelemetry/plugin-http',
