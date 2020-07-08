@@ -1,20 +1,17 @@
 // usage:
-
 // const provider = new NodeTracerProvider({
 //   plugins: {
-//     express: {
+//     x: {
 //       enabled: true,
 //       path: '@opentelemetry/plugin-express',
 //       ...GDPR_TELEMETRY <--- this is how it's done 
 //     },
-//     http: {
-//       enabled: true,
-//       path: '@opentelemetry/plugin-http',
-//     },
 //   }
 // });
 
-module.exports = configuration => ({
+import { GdprTelemetryConfiguration } from './GdprTrackingConfiguration'
+
+export const GdprTelemetry = (configuration: GdprTelemetryConfiguration) => ({
   applyCustomAttributesOnSpan: (span, request, response) => {
     console.log('GDPR_TELEMETRY', 'applyCustomAttributesOnSpan, serviceName:', configuration.serviceName);
 
