@@ -28,10 +28,11 @@
       // Using fetch: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
       fetch(url)
         // fetch(url, { mode: 'no-cors' })
-        .then(res => {
-          document.querySelector('#log').innerHTML += `Response id:${callCounter}, ${url}<br>`;
+        .then(res => res.text())
+        .then(text => {
+          document.querySelector('#log').innerHTML += `Response id:${callCounter}, url: ${url}, responseBody: ${text}<br>`;
         })
-    } //
+    } 
 
   </script>
 </body>
