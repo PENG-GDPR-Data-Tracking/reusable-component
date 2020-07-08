@@ -19,7 +19,7 @@ import http from 'http';
 const app = express();
 const port = SERVICE_PORT;
 
-app.use(express.static('src/client-1'));
+app.use(express.static('src/client-1/www'));
 app.get('*', (req, res) =>
 
   // we forward the request from the express web-server to server1

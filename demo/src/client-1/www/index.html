@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <title>OpenTelemetry Client</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>PEng reusable-component test client</h1>
+    <p><a href="http://localhost:9411" target="_blank">Zipkin @ localhost:9411.</a> To restart Zipkin (e.g. for tracing data cleanup) please restart the docker container.</p>
+    <p>
+      <button class="btn btn-primary" onclick="callAndLog(`api/profile`)">api/profile</button>
+      <button class="btn btn-primary" onclick="test(`api/profile`)">1000x api/profile</button>
+    </p>
+    <p>
+      <button class="btn btn-primary" onclick="callAndLog(`api/sleepdata`)">api/sleepdata</button>
+      <button class="btn btn-primary" onclick="test(`api/sleepdata`)">1000x api/sleepdata</button>
+    </p>
+    <h2>Log</h2>
+    <p id="log"></p>
+  </div>
+
+  <script src="app.js">
+  </script>
+</body>
+
+</html>
