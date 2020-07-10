@@ -1,4 +1,4 @@
-import { tracing } from '../opentelemerty';
+import { tracingNative } from '../opentelemerty';
 import * as path from 'path';
 
 const SERVICE_NAME = 'server-2';
@@ -13,7 +13,7 @@ const SERVICE_GDPR_TRACING_CONFIG = {
   basePurpose: 'Service for providing our WebApp',
 };
 
-tracing(SERVICE_GDPR_TRACING_CONFIG);
+tracingNative(SERVICE_GDPR_TRACING_CONFIG);
 
 import express from 'express';
 import { readFileSync } from 'fs';
