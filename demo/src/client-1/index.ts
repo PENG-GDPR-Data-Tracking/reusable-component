@@ -1,9 +1,4 @@
 import { tracing } from '../opentelemerty';
-import express from 'express';
-import http from 'http';
-const cors = require('cors');
-
-const app = express();
 const SERVICE_NAME = 'client-1';
 const SERVICE_PORT = 3000;
 const SERVICE_GDPR_TRACING_CONFIG = {
@@ -15,8 +10,15 @@ const SERVICE_GDPR_TRACING_CONFIG = {
   baseAutomatedDecisionMaking: false,
   basePurpose: 'Webserver for providing our WebApp',
 };
-
 tracing(SERVICE_GDPR_TRACING_CONFIG);
+
+// don't know why, but opentelemetry express plugin works better when express is not yet imported
+// so we initalize tracking and then import express
+
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+const app = express();
 
 app.use(express.static('src/client-1/web'), cors());
 
