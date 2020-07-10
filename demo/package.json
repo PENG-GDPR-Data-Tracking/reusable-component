@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-1": "nodemon src/client-1/index.ts",
-    "server-1": "nodemon src/server-1/index.ts",
-    "server-2": "nodemon src/server-2/index.ts",
-
+    "c1": "nodemon src/client-1/index.ts",
     "s1": "nodemon src/servers/server-1-users/index.ts",
     "s2": "nodemon src/servers/server-2-sleep-preprocessing/index.ts",
     "s3": "nodemon src/servers/server-3-health-preprocessing/index.ts",
@@ -15,7 +12,7 @@
     "s5": "nodemon src/servers/server-5-health-database/index.ts",
     "s6": "nodemon src/servers/server-6-statistics/index.ts",
 
-    "start": "concurrently --kill-others \"npm run client-1\" \"npm run s1\" \"npm run s2\" \"npm run s3\" \"npm run s4\" \"npm run s5\" \"npm run s6\" "
+    "start": "concurrently --kill-others \"npm run c1\" \"npm run s1\" \"npm run s2\" \"npm run s3\" \"npm run s4\" \"npm run s5\" \"npm run s6\" "
   },
   "author": "PEng Sose2020 Group 7",
   "license": "ISC",

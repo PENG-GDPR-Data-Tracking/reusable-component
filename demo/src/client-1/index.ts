@@ -1,6 +1,6 @@
 import { tracingNative } from '../opentelemerty';
 const SERVICE_NAME = 'client-1';
-const SERVICE_PORT = 3000;
+const SERVICE_PORT = 3001;
 const SERVICE_GDPR_TRACING_CONFIG = {
   serviceName: SERVICE_NAME,
   location: 'Europe',
@@ -38,4 +38,5 @@ app.use(express.static('src/client-1/web'), cors());
 
 app.get('*', (req, res) => res.send(`That's it from ${SERVICE_NAME}.`));
 
-app.listen(SERVICE_PORT, () => console.log(`${SERVICE_NAME} started at http://localhost:${SERVICE_PORT}`));
+// app.listen(SERVICE_PORT, () => console.log(`${SERVICE_NAME} started at http://localhost:${SERVICE_PORT}`));
+app.listen(SERVICE_PORT, () => console.log(`http://localhost:${SERVICE_PORT}: ${SERVICE_NAME} started.`));

@@ -22,7 +22,7 @@ export const tracingNative = (configuration: GdprTelemetryConfiguration) => {
     },
   });
 
-  let exporter = new ZipkinExporter({
+  const exporter = new ZipkinExporter({
     serviceName: configuration.serviceName,
   });
 

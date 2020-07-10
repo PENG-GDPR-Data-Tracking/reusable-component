@@ -1,4 +1,4 @@
-import { tracingNative } from '../opentelemerty';
+import { tracingNative } from '../../src/opentelemerty';
 import * as path from 'path';
 
 const SERVICE_NAME = 'server-2';

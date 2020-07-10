@@ -1,4 +1,4 @@
-import { tracingNative } from '../opentelemerty';
+import { tracingNative } from '../../src/opentelemerty';
 const SERVICE_NAME = 'server-1-sleep-processing';
 const SERVICE_PORT = 8001;
 const SERVICE_GDPR_TRACING_CONFIG = {
