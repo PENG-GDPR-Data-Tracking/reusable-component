@@ -4,8 +4,9 @@ const { SimpleSpanProcessor } = require('@opentelemetry/tracing');
 const { ZipkinExporter } = require('@opentelemetry/exporter-zipkin');
 
 import { GdprTelemetry, GdprTelemetryConfiguration } from '../../../telemetry-component';
+import { Server } from '../types';
 
-export const tracing = (configuration: GdprTelemetryConfiguration) => {
+export const tracingNative = (configuration: GdprTelemetryConfiguration) => {
   const provider = new NodeTracerProvider({
     plugins: {
       // using the express plugin here does not really works
@@ -32,3 +33,9 @@ export const tracing = (configuration: GdprTelemetryConfiguration) => {
 
   return opentelemetry.trace.getTracer('http-example');
 };
+
+export const tracing = (server: Server) => tracingNative({
+  serviceName: server.name,
+  location: server.location,
+  ...server.gdprTracingBaseConfiguration
+});

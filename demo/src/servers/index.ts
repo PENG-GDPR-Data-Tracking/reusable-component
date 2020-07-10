@@ -1,6 +1,5 @@
-import { tracing } from "../opentelemerty";
-import { registerServer } from "./registerServer";
-import { Server } from "./types";
+import { tracingNative } from "../opentelemerty";
+import { Server } from "../types";
 
 const SERVERS = [
   {
@@ -77,7 +76,7 @@ const SERVERS = [
     name: 'server-6-statistics',
     port: 8006,
     paths: ['/api1', '/api2'],
-    remoteUrls: ['http://localhost:8005/api2'],
+    remoteUrls: [],
     location: 'Europe',
     gdprTracingBaseConfiguration: {
       baseTTL: 0,
@@ -94,7 +93,7 @@ SERVERS.forEach((server: Server) => {
   // don't know why, but opentelemetry express plugin works better when express is not yet imported
   // so we initalize tracking and then register servers using dynamic import 
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
-  tracing({
+  tracingNative({
     serviceName: server.name,
     location: server.location,
     ...server.gdprTracingBaseConfiguration
