@@ -7,6 +7,7 @@
     "client-1": "nodemon src/client-1/index.ts",
     "server-1": "nodemon src/server-1/index.ts",
     "server-2": "nodemon src/server-2/index.ts",
+    "servers": "nodemon src/servers/index.ts",
     "start": "concurrently --kill-others \"npm run client-1\" \"npm run server-1\" \"npm run server-2\" "
   },
   "author": "PEng Sose2020 Group 7",

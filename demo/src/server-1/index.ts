@@ -1,8 +1,6 @@
 import { tracing } from '../opentelemerty';
-import * as path from 'path';
-
-const SERVICE_NAME = 'server-1';
-const SERVICE_PORT = 8080;
+const SERVICE_NAME = 'server-1-sleep-processing';
+const SERVICE_PORT = 8001;
 const SERVICE_GDPR_TRACING_CONFIG = {
   serviceName: SERVICE_NAME,
   location: 'Europe',
@@ -12,12 +10,12 @@ const SERVICE_GDPR_TRACING_CONFIG = {
   baseAutomatedDecisionMaking: false,
   basePurpose: 'Service for providing our WebApp',
 };
-
 tracing(SERVICE_GDPR_TRACING_CONFIG);
 
 import express from 'express';
 import http from 'http';
 var cors = require('cors');
+import path from 'path';
 import { readFileSync } from 'fs';
 const app = express();
 const port = SERVICE_PORT;
