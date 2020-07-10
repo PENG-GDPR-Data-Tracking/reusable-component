@@ -20,7 +20,7 @@ import http from 'http';
 const app = express();
 const port = SERVICE_PORT;
 
-app.use(express.static('src/client-1'), cors());
+app.use(express.static('src/client-1/web'), cors());
 app.get('*', (req, res) =>
   // we forward the request from the express web-server to server1
   // node will respond to the request as soon as the response from the other server comes
@@ -41,6 +41,4 @@ app.get('*', (req, res) =>
   )
 );
 
-app.listen(port, () => {
-  console.log(`${SERVICE_NAME} started at http://localhost:${port}`);
-});
+app.listen(port, () => console.log(`${SERVICE_NAME} started at http://localhost:${port}`));
