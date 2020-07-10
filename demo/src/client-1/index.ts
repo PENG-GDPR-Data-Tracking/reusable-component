@@ -1,5 +1,9 @@
 import { tracing } from '../opentelemerty';
+import express from 'express';
+import http from 'http';
+const cors = require('cors');
 
+const app = express();
 const SERVICE_NAME = 'client-1';
 const SERVICE_PORT = 3000;
 const SERVICE_GDPR_TRACING_CONFIG = {
@@ -14,31 +18,24 @@ const SERVICE_GDPR_TRACING_CONFIG = {
 
 tracing(SERVICE_GDPR_TRACING_CONFIG);
 
-import express from 'express';
-var cors = require('cors');
-import http from 'http';
-const app = express();
-const port = SERVICE_PORT;
-
 app.use(express.static('src/client-1/web'), cors());
-app.get('*', (req, res) =>
-  // we forward the request from the express web-server to server1
-  // node will respond to the request as soon as the response from the other server comes
-  http.get(
-    {
-      host: 'localhost',
-      port: 8080,
-      path: req.path,
-    },
-    (response) => {
-      // console.log('web-server:', 'server1 responded with', response)
-      const body = [];
-      response.on('data', (chunk) => body.push(chunk));
-      response.on('end', () => {
-        res.status(200).send(body.toString());
-      });
-    }
-  )
-);
 
-app.listen(port, () => console.log(`${SERVICE_NAME} started at http://localhost:${port}`));
+[
+  { path: '/api/userData', remoteUrl: 'http://localhost:8000/api/' },
+  { path: '/api/sleepData', remoteUrl: 'http://localhost:8001/api/' },
+  { path: '/api/bodyHealthData', remoteUrl: 'http://localhost:8000/api/' },
+].map(proxy => {
+  console.log('registered path', proxy.path)
+  app.get(proxy.path, (req, res) => {
+
+    // respond to the client
+    res.send(`Response to path ${proxy.path}`);
+
+    // pass the request
+    http.get(proxy.remoteUrl);
+  });
+});
+
+app.get('*', (req, res) => res.send("That's it."));
+
+app.listen(SERVICE_PORT, () => console.log(`${SERVICE_NAME} started at http://localhost:${SERVICE_PORT}`));
