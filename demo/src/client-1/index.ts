@@ -25,7 +25,7 @@ app.use(express.static('src/client-1/web'), cors());
 [
   { path: '/api/userData', remoteUrl: 'http://localhost:8000/api/' },
   { path: '/api/sleepData', remoteUrl: 'http://localhost:8001/api/' },
-  { path: '/api/bodyHealthData', remoteUrl: 'http://localhost:8000/api/' },
+  { path: '/api/bodyHealthData', remoteUrl: 'http://localhost:8002/api/' },
 ].map(proxy => {
   app.get(proxy.path, (req, res) => {
 
