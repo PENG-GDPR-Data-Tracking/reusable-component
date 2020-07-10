@@ -18,10 +18,9 @@ tracing(SERVICE_GDPR_TRACING_CONFIG);
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+
 const app = express();
-
 app.use(express.static('src/client-1/web'), cors());
-
 [
   { path: '/api/userData', remoteUrl: 'http://localhost:8000/api/' },
   { path: '/api/sleepData', remoteUrl: 'http://localhost:8001/api/' },
@@ -30,13 +29,13 @@ app.use(express.static('src/client-1/web'), cors());
   app.get(proxy.path, (req, res) => {
 
     // respond to the client
-    res.send(`Response to path ${proxy.path}`);
+    res.send(`Response to path ${proxy.path} from ${SERVICE_NAME}`);
 
     // pass the request
     http.get(proxy.remoteUrl);
   });
 });
 
-app.get('*', (req, res) => res.send("That's it."));
+app.get('*', (req, res) => res.send(`That's it from ${SERVICE_NAME}.`));
 
 app.listen(SERVICE_PORT, () => console.log(`${SERVICE_NAME} started at http://localhost:${SERVICE_PORT}`));
