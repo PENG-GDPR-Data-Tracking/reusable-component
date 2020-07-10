@@ -9,7 +9,8 @@ export const registerServer = (server: Server) => {
   console.log(`Registering server ${server.name}`);
 
   const app = express();
-  const staticPath = path.resolve(__dirname, `${server.name}-static`);
+  const staticPath = path.resolve(__dirname, `${server.name}/web`);
+  console.log('staticPath', staticPath)
   app.use(express.static(staticPath), cors());
 
   server.paths.forEach(path => {
