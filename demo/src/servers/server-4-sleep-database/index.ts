@@ -4,7 +4,7 @@ const CONFIG = {
   name: 'server-4-sleep-database',
   port: 8004,
   paths: ['/api1', '/api2'],
-  remoteUrls: ['http://localhost:8005/api2'],
+  remoteUrls: ['http://localhost:8006/api2'],
   location: 'Europe',
   gdprTracingBaseConfiguration: {
     baseTTL: 0,
