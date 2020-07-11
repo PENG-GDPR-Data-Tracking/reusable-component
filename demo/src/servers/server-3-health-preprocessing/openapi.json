@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Demo Server 3 API",
+      "description": "Demo Server API\n",
+      "version": "1"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8003/api/v1"
+      },
+      {
+        "url": "https://localhost:8003/api/v1"
+      }
+    ],
+    "paths": {
+      "/rawhealthdata/{id}": {
+        "get": {
+          "description": "Returns the raw health data for the user with the given ID\n",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User unqiue identifier\n",
+              "required": true,
+              "schema": {
+                "maxLength": 32,
+                "minLength": 16,
+                "pattern": "[a-f0-9]{16,32}",
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "RAWHealthData": {
+          "title": "RAWHealthData",
+          "type": "object",
+          "x-gdpr-data-type": "personal",
+          "x-gdpr-data-reason": "required for the sleep data processing",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the User"
+            },
+            "weight": {
+              "minimum": 0,
+              "maximum": 800,
+              "type": "number",
+              "description": "weight of the user in kg\n"
+            },
+            "fat": {
+              "type": "number",
+              "description": "users body fat percentage\n",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "muscle": {
+                "type": "number",
+                "description": "users muscle percentage\n",
+                "minimum": 0,
+                "maximum": 100
+              }
+          },
+          "description": "Body health data of a user of this application\n",
+          "example": {
+            "id": "352bff9a74ca9ad2",
+            "traceId": "5af7183fb1d4cf5f",
+            "parentId": "6b221d5bc9e6496c",
+            "name": "get /api",
+            "timestamp": 1556604172355737,
+            "weight": 74,
+            "fat": 23,
+            "muscle": 14,
+            "localEndpoint": {
+              "serviceName": "backend",
+              "ipv4": "192.168.99.1",
+              "port": 3306
+            },
+            "remoteEndpoint": {
+              "ipv4": "172.19.0.2",
+              "port": 58648
+            },
+            "tags": {
+              "http.method": "GET",
+              "http.path": "/api"
+            }
+          }
+        }
+      }
+    }
+  }
+  

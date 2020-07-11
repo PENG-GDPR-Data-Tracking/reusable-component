@@ -1,27 +1,24 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Demo Server 1 API",
+    "title": "Demo Server 2 API",
     "description": "Demo Server API\n",
     "version": "1"
   },
   "servers": [
     {
-      "url": "http://localhost:9411/api/v1"
-    },
-    {
-      "url": "https://localhost:9411/api/v1"
+      "url": "http://localhost:8002/api/v1"
     }
   ],
   "paths": {
-    "/user/{id}": {
+    "/sleepdata/{id}": {
       "get": {
-        "description": "Returns the user with the given id\n",
+        "description": "Returns the sleep data with the given id\n",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "User unqiue identifier\n",
+            "description": "sleep dataset unqiue identifier\n",
             "required": true,
             "schema": {
               "maxLength": 32,
@@ -48,41 +45,33 @@
   },
   "components": {
     "schemas": {
-      "User": {
-        "title": "User",
-        "required": ["id"],
+      "SleepData": {
+        "title": "Sleepdata",
         "type": "object",
+        "x-processed": false,
         "x-gdpr-data-type": "personal",
+        "x-gdpr-data-reason": "required for sleep data processing",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the User"
-          },
-          "id": {
-            "maxLength": 16,
-            "minLength": 16,
-            "pattern": "[a-f0-9]{16}",
-            "type": "string",
-            "description": "Unique 64bit identifier. For example ffdc9bb9a6453df3\n"
-          },
-          "kind": {
-            "type": "string",
-            "description": "When present, kind clarifies timestamp, duration and remoteEndpoint. When\nabsent, the span is local or incomplete. Unlike client and server, there\nis no direct critical path latency relationship between producer and\nconsumer spans.\n",
-            "enum": ["CLIENT", "SERVER", "PRODUCER", "CONSUMER"]
-          },
-          "signUpDate": {
-            "type": "integer",
-            "description": "The date you signed up to our service.",
-            "format": "int64"
-          },
           "duration": {
-            "minimum": 1,
+            "type": "number",
+            "description": "duration of the sleep in minutes"
+          },
+          "quality": {
             "type": "integer",
-            "description": "what ever",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "user submitted sleep quality index",
             "format": "int64"
+          },
+          "sleeptrackingdata": {
+            "type": "array",
+            "description": "sleep tracking data",
+            "items": {
+              "type": "object"
+            }
           }
         },
-        "description": "A User of this application\n",
+        "description": "Sleep data of a user\n",
         "example": {
           "id": "352bff9a74ca9ad2",
           "traceId": "5af7183fb1d4cf5f",
@@ -90,7 +79,7 @@
           "name": "get /api",
           "timestamp": 1556604172355737,
           "duration": 1431,
-          "kind": "SERVER",
+          "quality": 7,
           "localEndpoint": {
             "serviceName": "backend",
             "ipv4": "192.168.99.1",

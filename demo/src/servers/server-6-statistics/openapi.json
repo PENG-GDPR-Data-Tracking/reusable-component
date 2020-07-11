@@ -1,0 +1,82 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Demo Server 1 API",
+      "description": "Demo Server API\n",
+      "version": "1"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8006/api/v1"
+      }
+    ],
+    "paths": {
+        "/statistics": {
+            "get": {
+              "summary": "Your GET endpoint",
+              "tags": [],
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              },
+              "operationId": "get-statistics"
+            }
+          }
+    },
+    "components": {
+        "schemas": {
+          "statistics": {
+            "title": "statistics",
+            "type": "object",
+            "x-processed": false,
+            "x-gdpr-data-type": "non-personal",
+            "x-gdpr-data-reason": "scientific and marketing purposes",
+            "properties": {
+              "duration": {
+                "type": "number",
+                "description": "average duration of the sleep in minutes"
+              },
+              "quality": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10,
+                "description": "average user submitted sleep quality index",
+                "format": "int64"
+              }
+            },
+            "description": "Sleep data of a user\n",
+            "example": {
+              "id": "352bff9a74ca9ad2",
+              "traceId": "5af7183fb1d4cf5f",
+              "parentId": "6b221d5bc9e6496c",
+              "name": "get /api",
+              "timestamp": 1556604172355737,
+              "duration": 1431,
+              "quality": 7,
+              "localEndpoint": {
+                "serviceName": "backend",
+                "ipv4": "192.168.99.1",
+                "port": 3306
+              },
+              "remoteEndpoint": {
+                "ipv4": "172.19.0.2",
+                "port": 58648
+              },
+              "tags": {
+                "http.method": "GET",
+                "http.path": "/api"
+              }
+          }
+        }
+      }
+    }
+  }
+  

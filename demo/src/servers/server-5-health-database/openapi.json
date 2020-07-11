@@ -1,0 +1,90 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Demo Server 5 API",
+      "description": "Demo Server API\n",
+      "version": "1"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8004/api/v1"
+      },
+      {
+        "url": "https://localhost:9411/api/v1"
+      }
+    ],
+    "paths": {
+      "/healthdata/{id}": {
+        "get": {
+          "description": "Returns the health data for the user with the given ID\n\n",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User unqiue identifier\n",
+              "required": true,
+              "schema": {
+                "maxLength": 32,
+                "minLength": 16,
+                "pattern": "[a-f0-9]{16,32}",
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "*/*": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "HealthData": {
+          "title": "HealthData",
+          "type": "object",
+          "x-gdpr-data-type": "personal",
+          "x-gdpr-data-reason": "used for anonymous statistics",
+          "properties": {
+            "healthindex": {
+              "minimum": 1,
+              "maximum": 100,
+              "type": "integer",
+              "description": "health score of a given user, will be used for anonymous statistics and user feedback"
+            }
+          },
+          "description": "Processed health data for a user of this application\n",
+          "example": {
+            "id": "352bff9a74ca9ad2",
+            "traceId": "5af7183fb1d4cf5f",
+            "parentId": "6b221d5bc9e6496c",
+            "name": "get /api",
+            "timestamp": 1556604172355737,
+            "healthindex": 45,
+            "localEndpoint": {
+              "serviceName": "backend",
+              "ipv4": "192.168.99.1",
+              "port": 3306
+            },
+            "remoteEndpoint": {
+              "ipv4": "172.19.0.2",
+              "port": 58648
+            },
+            "tags": {
+              "http.method": "GET",
+              "http.path": "/api"
+            }
+          }
+        }
+      }
+    }
+  }
+  

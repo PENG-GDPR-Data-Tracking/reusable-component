@@ -52,7 +52,8 @@
         "title": "User",
         "required": ["id"],
         "type": "object",
-        "x-gdpr-data-type": "personal",
+        "x-gdpr-data-type": "identifier",
+        "x-gdpr-data-reason": "required for user data allocation and management",
         "properties": {
           "name": {
             "type": "string",
