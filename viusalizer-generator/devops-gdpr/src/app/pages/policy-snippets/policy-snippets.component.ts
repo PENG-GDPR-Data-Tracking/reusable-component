@@ -28,7 +28,7 @@ export class PolicySnippetsComponent implements OnInit {
     this.getAllPolicies(
       Array.from(
         new Set([
-          ...this.appState.endpoints.map((e) => e + '/swagger/openapi.json'),
+          ...this.appState.endpoints.map((e) => e + '/openapi/openapi.json'),
         ])
       )
     ).subscribe((documents) => {
