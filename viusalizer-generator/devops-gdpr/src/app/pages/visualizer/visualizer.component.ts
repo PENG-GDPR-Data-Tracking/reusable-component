@@ -25,9 +25,13 @@ export class VisualizerComponent {
   curve = shape.curveNatural;
 
   traces: ListOfTraces = [];
-
+  private nodesMap: Map<String, Node> = new Map();
   public nodes: Node[] = [];
   public edges: Edge[] = [];
+
+  public updateNodes() {
+    this.nodes = Array.from(this.nodesMap.values());
+  }
 
   constructor(
     api: DefaultService,
@@ -41,7 +45,7 @@ export class VisualizerComponent {
         null,
         null,
         null,
-        40000,
+        null,
         null,
         new Date().getTime(),
         90000000,
@@ -50,13 +54,18 @@ export class VisualizerComponent {
       )
       .subscribe((ans) => {
         this.traces = ans.body;
-        let analyzeSpans = this.traces[0].filter(
-          (span) => span.kind === 'CLIENT' || span.kind === 'SERVER'
-        );
-        this.appState.endpoints = analyzeSpans.map((span) =>
-          this.getHostFromURL(span.tags['http.url'])
-        );
-        this.getEdgesAndNodesFromSpan(analyzeSpans);
+        this.traces.forEach((trace) => {
+          let spans = trace.filter(
+            (span) => span.kind === 'CLIENT' || span.kind === 'SERVER'
+          );
+          this.getEdgesAndNodesFromSpan(spans);
+          this.appState.endpoints = spans.map((span) =>
+            this.getHostFromURL(span.tags['http.url'])
+          );
+        });
+        this.updateNodes();
+        console.log(this.nodes);
+        console.log(this.edges);
       });
   }
 
@@ -68,14 +77,14 @@ export class VisualizerComponent {
   private getEdgesAndNodesFromSpan(json: Trace) {
     let set = new Set(json.map((span) => span.localEndpoint.serviceName));
     let services = Array.from(set);
-    this.nodes = services.map((service) => {
+    services.forEach((service) => {
       let serviceSpans = json.filter(
         (s) => s.localEndpoint.serviceName === service
       );
       if (serviceSpans.length > 1) {
         serviceSpans = serviceSpans.filter((s) => s.kind === 'SERVER');
       }
-      return {
+      this.nodesMap.set(service, {
         id: service,
         label: service,
         data: {
@@ -84,9 +93,8 @@ export class VisualizerComponent {
           legalBasis: serviceSpans[0].tags['gdpr.legalBasis'],
           span: serviceSpans[0],
         },
-      };
+      });
     });
-    console.log(this.nodes);
 
     json.forEach((span) => {
       if (span.parentId) {
@@ -102,11 +110,9 @@ export class VisualizerComponent {
         };
         if (span.localEndpoint.serviceName != edge.source) {
           this.edges.push(edge);
-          // this.edges.push(edge);
         }
       }
     });
-    console.log(this.edges);
   }
 
   openDialog(edge: any): void {
