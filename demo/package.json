@@ -5,13 +5,12 @@
   "main": "index.js",
   "scripts": {
     "c1": "nodemon src/client-1/index.ts",
-    "s1": "nodemon src/servers/server-1-users/index.ts",
-    "s2": "nodemon src/servers/server-2-sleep-preprocessing/index.ts",
-    "s3": "nodemon src/servers/server-3-health-preprocessing/index.ts",
-    "s4": "nodemon src/servers/server-4-sleep-database/index.ts",
-    "s5": "nodemon src/servers/server-5-health-database/index.ts",
-    "s6": "nodemon src/servers/server-6-statistics/index.ts",
-
+    "s1": "nodemon src/servers/users-server/index.ts",
+    "s2": "nodemon src/servers/sleep-preprocessing-server/index.ts",
+    "s3": "nodemon src/servers/health-preprocessing-server/index.ts",
+    "s4": "nodemon src/servers/sleep-database/index.ts",
+    "s5": "nodemon src/servers/health-database/index.ts",
+    "s6": "nodemon src/servers/statistics-server/index.ts",
     "start": "concurrently --kill-others \"npm run c1\" \"npm run s1\" \"npm run s2\" \"npm run s3\" \"npm run s4\" \"npm run s5\" \"npm run s6\" "
   },
   "author": "PEng Sose2020 Group 7",

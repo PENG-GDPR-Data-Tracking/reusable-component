@@ -1,5 +1,5 @@
 import { tracingNative } from '../opentelemerty';
-const SERVICE_NAME = 'client-1';
+const SERVICE_NAME = 'client';
 const SERVICE_PORT = 3001;
 const SERVICE_GDPR_TRACING_CONFIG = {
   serviceName: SERVICE_NAME,
