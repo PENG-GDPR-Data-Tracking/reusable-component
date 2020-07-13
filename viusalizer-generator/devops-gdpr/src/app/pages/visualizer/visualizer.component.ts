@@ -59,9 +59,10 @@ export class VisualizerComponent {
             (span) => span.kind === 'CLIENT' || span.kind === 'SERVER'
           );
           this.getEdgesAndNodesFromSpan(spans);
-          this.appState.endpoints = spans.map((span) =>
-            this.getHostFromURL(span.tags['http.url'])
-          );
+          this.appState.endpoints = [
+            ...this.appState.endpoints,
+            ...spans.map((span) => this.getHostFromURL(span.tags['http.url'])),
+          ];
         });
         this.updateNodes();
         console.log(this.nodes);
