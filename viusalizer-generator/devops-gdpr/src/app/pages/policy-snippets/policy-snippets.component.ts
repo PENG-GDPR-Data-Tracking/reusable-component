@@ -4,6 +4,7 @@ import { Observable, observable, forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { OpenAPIV3 } from 'openapi-types';
 import { AppStateService } from 'src/app/app-state.service';
+import { ListOfTraces } from 'src/app/zipkin';
 
 @Component({
   selector: 'app-policy-snippets',
@@ -15,6 +16,12 @@ export class PolicySnippetsComponent implements OnInit {
   personalEntities;
   anonymousEntities;
 
+  purposes: string[] = [];
+  locations: string[] = [];
+  maxTTL: number;
+  legalBasis: string[] = [];
+
+  private endpoints: string[] = [];
   constructor(
     private httpClient: HttpClient,
     private appState: AppStateService
@@ -25,19 +32,53 @@ export class PolicySnippetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllPolicies(
-      Array.from(
-        new Set([
-          ...this.appState.endpoints.map((e) => e + '/openapi/openapi.json'),
-        ])
-      )
-    ).subscribe((documents) => {
-      this.personalEntities = documents.reduce((accumulator, currentDoc) => {
-        return [...accumulator, ...this.getEntitiesFromSchema(currentDoc)];
-      }, []);
+    this.appState.traces.subscribe((traces) => {
+      traces.forEach((trace) => {
+        this.endpoints = [
+          ...this.endpoints,
+          ...trace.map((span) => this.getHostFromURL(span.tags['http.url'])),
+        ];
+      });
+      this.getAllPolicies(
+        Array.from(
+          new Set([...this.endpoints.map((e) => e + '/openapi/openapi.json')])
+        )
+      ).subscribe((documents) => {
+        let entities = documents.reduce((accumulator, currentDoc) => {
+          return [...accumulator, ...this.getEntitiesFromSchema(currentDoc)];
+        }, new Array<OpenAPIV3.ReferenceObject | OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject>());
+        this.personalEntities = entities.filter(
+          (entity) => entity['x-gdpr-data-type'] === 'personal'
+        );
+        this.anonymousEntities = entities.filter(
+          (entity) => entity['x-gdpr-data-type'] === 'non-personal'
+        );
+        this.anonymousEntities = entities.filter(
+          (entity) => entity['x-gdpr-data-type'] === 'non-personal'
+        );
+      });
+      this.locations = Array.from(
+        new Set(this.getTagsFromAllTraces(traces, 'gdpr.location'))
+      );
+      this.legalBasis = Array.from(
+        new Set(this.getTagsFromAllTraces(traces, 'gdpr.legalBasis'))
+      );
+      this.purposes = Array.from(
+        new Set(this.getTagsFromAllTraces(traces, 'gdpr.purpose'))
+      );
+      this.maxTTL = Number.parseFloat(
+        this.getTagsFromAllTraces(traces, 'gdpr.ttl').reduce((acc, ttl) => {
+          if (Number.parseFloat(acc) >= Number.parseFloat(ttl)) return acc;
+          return ttl;
+        })
+      );
     });
   }
 
+  private getHostFromURL(url: string) {
+    let split = new RegExp('^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?(.*)$').exec(url);
+    return split[1] + '//' + split[2] + split[3];
+  }
   private getEntitiesFromSchema(schema: OpenAPIV3.Document) {
     if (schema == null) {
       return [];
@@ -56,5 +97,18 @@ export class PolicySnippetsComponent implements OnInit {
           .pipe<OpenAPIV3.Document | null>(catchError((err) => of(null)));
       })
     );
+  }
+  public getTagsFromAllTraces(traces: ListOfTraces, tag: string): string[] {
+    return traces.reduce((acc, spans) => {
+      return [
+        ...acc,
+        ...spans.reduce((accumulator, span) => {
+          if (span.tags[tag]) {
+            return [...accumulator, span.tags[tag]];
+          }
+          return accumulator;
+        }, []),
+      ];
+    }, []);
   }
 }

@@ -1,25 +1,73 @@
-<!-- <p>{{entities | json}}</p> -->
+<mat-card>
 
-<p>Special Categories of Data</p>
+    <mat-card-header>
+        <h1>What data do we collect and store?</h1>
+    </mat-card-header>
 
-<div *ngFor="let entity of specialEntities">
-    <p>{{entity.title}}</p>
+    We collect the following types of data (according to GDPR Art. ...):
+
+    <h2>Special Categories of Data</h2>
+
+    <div *ngFor="let entity of specialEntities">
+        <p>{{entity.title}}</p>
+        <li *ngFor="let property of getProperties(entity.properties)">{{property}} (
+            {{entity.properties[property].description}})</li>
+    </div>
+
+    <h2>Personal Data</h2>
+
+    <div *ngFor="let entity of personalEntities">
+        <p>{{entity.title}}</p>
+
+        <li *ngFor="let property of getProperties(entity.properties)">{{property}} (
+            {{entity.properties[property].description}})</li>
+    </div>
 
 
-</div>
+    <h2>Anonymous Data</h2>
 
-<p>Personal Data</p>
+    <div *ngFor="let entity of anonymousEntities">
+        <p>{{entity.title}}</p>
 
-<div *ngFor="let entity of personalEntities">
-    <p>{{entity.title}}</p>
+        <li *ngFor="let property of getProperties(entity.properties)">{{property}} (
+            {{entity.properties[property].description}})</li>
+    </div>
 
-    <li *ngFor="let property of getProperties(entity.properties)">{{property}} (
-        {{entity.properties[property].description}})</li>
-</div>
+    <p></p>
+    <p>We store your data for up to "{{maxTTL == 0 ? maxTTL / 60 / 60 : 0}}" Hours at the following locations:</p>
+
+    <div>
+        <li *ngFor="let location of locations">{{location}}</li>
+    </div>
 
 
-<p>Anonymous Data</p>
+</mat-card>
 
-<div *ngFor="let entity of anonymousEntities">
-    <p>{{entity.title}}</p>
-</div>
+<mat-card>
+
+    <mat-card-header>
+        <h1>How do we collect data?</h1>
+    </mat-card-header>
+
+    We collect your data based on the following regularies:
+
+    <div>
+        <li *ngFor="let legal of legalBasis">{{legal}}</li>
+    </div>
+
+</mat-card>
+
+
+
+<mat-card>
+
+    <mat-card-header>
+        <h1>How will we use your data?</h1>
+    </mat-card-header>
+
+
+    <div>
+        <li *ngFor="let purpose of purposes">{{purpose}}</li>
+    </div>
+
+</mat-card>

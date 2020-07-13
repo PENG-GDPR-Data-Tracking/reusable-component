@@ -24,7 +24,6 @@ export class VisualizerComponent {
   }
   curve = shape.curveNatural;
 
-  traces: ListOfTraces = [];
   private nodesMap: Map<String, Node> = new Map();
   public nodes: Node[] = [];
   public edges: Edge[] = [];
@@ -38,41 +37,16 @@ export class VisualizerComponent {
     private appState: AppStateService,
     public dialog: MatDialog
   ) {
-    this.height = window.innerHeight - 64;
-    this.width = window.innerWidth;
-    api
-      .tracesGet(
-        null,
-        null,
-        null,
-        null,
-        null,
-        new Date().getTime(),
-        90000000,
-        100,
-        'response'
-      )
-      .subscribe((ans) => {
-        this.traces = ans.body;
-        this.traces.forEach((trace) => {
-          let spans = trace.filter(
-            (span) => span.kind === 'CLIENT' || span.kind === 'SERVER'
-          );
-          this.getEdgesAndNodesFromSpan(spans);
-          this.appState.endpoints = [
-            ...this.appState.endpoints,
-            ...spans.map((span) => this.getHostFromURL(span.tags['http.url'])),
-          ];
-        });
-        this.updateNodes();
-        console.log(this.nodes);
-        console.log(this.edges);
+    this.appState.traces.subscribe((traces) => {
+      this.height = window.innerHeight - 64;
+      this.width = window.innerWidth;
+      traces.forEach((trace) => {
+        this.getEdgesAndNodesFromSpan(trace);
       });
-  }
-
-  private getHostFromURL(url: string) {
-    let split = new RegExp('^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?(.*)$').exec(url);
-    return split[1] + '//' + split[2] + split[3];
+      this.updateNodes();
+      console.log(this.nodes);
+      console.log(this.edges);
+    });
   }
 
   private getEdgesAndNodesFromSpan(json: Trace) {
