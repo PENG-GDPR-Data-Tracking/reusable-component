@@ -20,7 +20,7 @@
     "b2-benchmark": "concurrently \"npm run b2\" \"wait-on http://localhost:8002 && npm run b2-artillery\" ",
     "b3": "ts-node src-benchmark/server-3-gdprtracking.ts",
     "b3-artillery": "artillery quick --count 10 -n 20 http://localhost:8003",
-    "b3-benchmark": "concurrently \"npm run b3\" \"wait-on http://localhost:8003 && npm run b3-artillery\" "
+    "b3-benchmark": "concurrently \"npm run b3\" \"wait-on http://localhost:8003 && npm run b3-artillery\" ",
     "prod": "concurrently --kill-other \"npm run c1p\" \"npm run s1p\" \"npm run s2p\" \"npm run s3p\" \"npm run s4p\" \"npm run s5p\" \"npm run s6p\""
   },
   "author": "PEng Sose2020 Group 7",
