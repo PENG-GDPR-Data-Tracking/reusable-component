@@ -25,5 +25,5 @@ export const registerServer = (server: Server) => {
   });
 
   app.get('*', (req, res) => res.send(`That's it from ${server.name}.`));
-  app.listen(server.port, () => console.log(`http://localhost:${server.port}: ${server.name} started.`));
+  app.listen(server.port, '0.0.0.0', () => console.log(`http://localhost:${server.port}: ${server.name} started.`));
 };
