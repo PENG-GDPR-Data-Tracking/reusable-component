@@ -56,25 +56,45 @@
           "properties": {
             "name": {
               "type": "string",
-              "description": "The name of the User"
+              "description": "The name of the User",
+              "x-gdpr-data-category": "personal",
+              "x-gpdr-data-type": "identifier",
+              "x-gdpr-data-reason": "used for identification and addressing the user",
+              "x-gdpr-data-subject-category": "customer",
+              "x-gdpr-data-non-provided-consequences": "user cannot be addressed directly"
             },
             "weight": {
               "minimum": 0,
               "maximum": 800,
               "type": "number",
-              "description": "weight of the user in kg\n"
+              "description": "weight of the user in kg\n",
+              "x-gdpr-data-category": "special",
+              "x-gpdr-data-type": "sensitive",
+              "x-gdpr-data-reason": "used for the sleep data processing and health scores",
+              "x-gdpr-data-subject-category": "customer",
+              "x-gdpr-data-non-provided-consequences": "sleep processing & health score less accurate"
             },
             "fat": {
               "type": "number",
               "description": "users body fat percentage\n",
               "minimum": 0,
-              "maximum": 100
+              "maximum": 100,
+              "x-gdpr-data-category": "special",
+              "x-gpdr-data-type": "sensitive",
+              "x-gdpr-data-reason": "used for the sleep data processing and health scores",
+              "x-gdpr-data-subject-category": "customer",
+              "x-gdpr-data-non-provided-consequences": "sleep processing & health score less accurate"
             },
             "muscle": {
-                "type": "number",
-                "description": "users muscle percentage\n",
-                "minimum": 0,
-                "maximum": 100
+              "type": "number",
+              "description": "users muscle percentage\n",
+              "minimum": 0,
+              "maximum": 100,
+              "x-gdpr-data-category": "special",
+              "x-gpdr-data-type": "sensitive",
+              "x-gdpr-data-reason": "used for the sleep data processing and health scores",
+              "x-gdpr-data-subject-category": "customer",
+              "x-gdpr-data-non-provided-consequences": "sleep processing & health score less accurate"
               }
           },
           "description": "Body health data of a user of this application\n",

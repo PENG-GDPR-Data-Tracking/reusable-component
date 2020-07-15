@@ -37,7 +37,7 @@
             "title": "statistics",
             "type": "object",
             "x-processed": false,
-            "x-gdpr-data-type": "non-personal",
+            "x-gdpr-data-type": "anonymous",
             "x-gdpr-data-reason": "scientific and marketing purposes",
             "properties": {
               "duration": {
@@ -49,7 +49,12 @@
                 "minimum": 1,
                 "maximum": 10,
                 "description": "average user submitted sleep quality index",
-                "format": "int64"
+                "format": "int64",
+                "x-gdpr-data-category": "anonymous",
+                "x-gpdr-data-type": "non-sensitive",
+                "x-gdpr-data-reason": "used for anonymous data evaluation for scientific and marketing purposes",
+                "x-gdpr-data-subject-category": "customer",
+                "x-gdpr-data-non-provided-consequences": "data evaluation not possible"
               }
             },
             "description": "Sleep data of a user\n",

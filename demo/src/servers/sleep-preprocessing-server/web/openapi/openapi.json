@@ -54,21 +54,36 @@
         "properties": {
           "duration": {
             "type": "number",
-            "description": "duration of the sleep in minutes"
+            "description": "duration of the sleep in minutes",
+            "x-gdpr-data-category": "personal",
+            "x-gpdr-data-type": "sensitive",
+            "x-gdpr-data-reason": "used for the sleep data processing",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "sleep processing not possible"
           },
           "quality": {
             "type": "integer",
             "minimum": 1,
             "maximum": 10,
             "description": "user submitted sleep quality index",
-            "format": "int64"
+            "format": "int64",
+            "x-gdpr-data-category": "special",
+            "x-gpdr-data-type": "sensitive",
+            "x-gdpr-data-reason": "used for the sleep data processing & evaluation",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "sleep processing less accurate, no correlation to subjective quality possible"
           },
           "sleeptrackingdata": {
             "type": "array",
             "description": "sleep tracking data",
             "items": {
               "type": "object"
-            }
+            },
+            "x-gdpr-data-category": "special",
+            "x-gpdr-data-type": "sensitive",
+            "x-gdpr-data-reason": "used for the sleep data processing",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "sleep processing not possible"
           }
         },
         "description": "Sleep data of a user\n",

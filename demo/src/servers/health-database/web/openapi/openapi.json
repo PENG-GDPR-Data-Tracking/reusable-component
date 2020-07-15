@@ -55,6 +55,11 @@
           "x-gdpr-data-reason": "used for anonymous statistics",
           "properties": {
             "healthindex": {
+              "x-gdpr-data-category": "special",
+              "x-gpdr-data-type": "sensitive",
+              "x-gdpr-data-reason": "used for anonymous statistics",
+              "x-gdpr-data-subject-category": "customer",
+              "x-gdpr-data-non-provided-consequences": "user data not showing up in statistics",
               "minimum": 1,
               "maximum": 100,
               "type": "integer",

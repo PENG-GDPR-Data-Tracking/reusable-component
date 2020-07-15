@@ -8,9 +8,6 @@
   "servers": [
     {
       "url": "http://localhost:9411/api/v1"
-    },
-    {
-      "url": "https://localhost:9411/api/v1"
     }
   ],
   "paths": {
@@ -57,14 +54,24 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of the User"
+            "description": "The name of the User",
+            "x-gdpr-data-category": "personal",
+            "x-gdpr-data-type": "quasi-identifier",
+            "x-gdpr-data-reason": "used for user identification",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "user cannot be addressed personally and identified properly"
           },
           "id": {
             "maxLength": 16,
             "minLength": 16,
             "pattern": "[a-f0-9]{16}",
             "type": "string",
-            "description": "Unique 64bit identifier. For example ffdc9bb9a6453df3\n"
+            "description": "Unique 64bit identifier. For example ffdc9bb9a6453df3\n",
+            "x-gdpr-data-category": "personal",
+            "x-gdpr-data-type": "identifier",
+            "x-gdpr-data-reason": "used for the sleep data processing",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "sleep processing not possible"
           },
           "kind": {
             "type": "string",
@@ -74,13 +81,23 @@
           "signUpDate": {
             "type": "integer",
             "description": "The date you signed up to our service.",
-            "format": "int64"
+            "format": "int64",
+            "x-gdpr-data-category": "personal",
+            "x-gdpr-data-type": "non-sensitive",
+            "x-gdpr-data-reason": "used for the sleep data processing",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "sleep processing not possible"
           },
           "duration": {
             "minimum": 1,
             "type": "integer",
-            "description": "what ever",
-            "format": "int64"
+            "description": "time since last login in s",
+            "format": "int64",
+            "x-gdpr-data-category": "personal",
+            "x-gdpr-data-type": "non-sensitive",
+            "x-gdpr-data-reason": "used for custom welcome-back messages",
+            "x-gdpr-data-subject-category": "customer",
+            "x-gdpr-data-non-provided-consequences": "custom messages may not be displayed"
           }
         },
         "description": "A User of this application\n",
