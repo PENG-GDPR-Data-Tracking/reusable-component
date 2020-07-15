@@ -12,6 +12,10 @@ import { ListOfTraces } from 'src/app/zipkin';
   styleUrls: ['./policy-snippets.component.scss'],
 })
 export class PolicySnippetsComponent implements OnInit {
+  constructor(
+    private httpClient: HttpClient,
+    private appState: AppStateService
+  ) {}
   specialEntities;
   personalEntities;
   anonymousEntities;
@@ -22,10 +26,11 @@ export class PolicySnippetsComponent implements OnInit {
   legalBasis: string[] = [];
 
   private endpoints: string[] = [];
-  constructor(
-    private httpClient: HttpClient,
-    private appState: AppStateService
-  ) {}
+
+  public static getHostFromURL(url: string) {
+    let split = new RegExp('^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?(.*)$').exec(url);
+    return split[1] + '//' + split[2] + split[3];
+  }
 
   public getProperties(object: Object) {
     return Object.keys(object);
@@ -36,7 +41,9 @@ export class PolicySnippetsComponent implements OnInit {
       traces.forEach((trace) => {
         this.endpoints = [
           ...this.endpoints,
-          ...trace.map((span) => this.getHostFromURL(span.tags['http.url'])),
+          ...trace.map((span) =>
+            PolicySnippetsComponent.getHostFromURL(span.tags['http.url'])
+          ),
         ];
       });
       this.getAllPolicies(
@@ -51,10 +58,10 @@ export class PolicySnippetsComponent implements OnInit {
           (entity) => entity['x-gdpr-data-type'] === 'personal'
         );
         this.anonymousEntities = entities.filter(
-          (entity) => entity['x-gdpr-data-type'] === 'non-personal'
+          (entity) => entity['x-gdpr-data-type'] === 'anonymous'
         );
-        this.anonymousEntities = entities.filter(
-          (entity) => entity['x-gdpr-data-type'] === 'non-personal'
+        this.specialEntities = entities.filter(
+          (entity) => entity['x-gdpr-data-type'] === 'special'
         );
       });
       this.locations = Array.from(
@@ -73,11 +80,6 @@ export class PolicySnippetsComponent implements OnInit {
         })
       );
     });
-  }
-
-  private getHostFromURL(url: string) {
-    let split = new RegExp('^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?(.*)$').exec(url);
-    return split[1] + '//' + split[2] + split[3];
   }
   private getEntitiesFromSchema(schema: OpenAPIV3.Document) {
     if (schema == null) {

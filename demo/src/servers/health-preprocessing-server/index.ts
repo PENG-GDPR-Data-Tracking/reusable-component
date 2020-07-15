@@ -7,7 +7,7 @@ const CONFIG = {
   remoteUrls: ['http://localhost:8004/api1', 'http://localhost:8005/api1'],
   location: 'Europe',
   gdprTracingBaseConfiguration: {
-    baseTTL: 0,
+    baseTTL: 216000,
     baseLegalBasis: 'Contractual',
     baseLegitimateInterest: '',
     baseAutomatedDecisionMaking: false,

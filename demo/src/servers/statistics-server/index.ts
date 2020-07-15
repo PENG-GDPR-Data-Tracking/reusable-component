@@ -5,7 +5,7 @@ const CONFIG = {
   port: 8006,
   paths: ['/api1', '/api2'],
   remoteUrls: [],
-  location: 'Europe',
+  location: 'USA',
   gdprTracingBaseConfiguration: {
     baseTTL: 0,
     baseLegalBasis: 'Contractual',
