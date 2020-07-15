@@ -51,7 +51,7 @@
         "RAWHealthData": {
           "title": "RAWHealthData",
           "type": "object",
-          "x-gdpr-data-type": "personal",
+          "x-gdpr-data-type": "special",
           "x-gdpr-data-reason": "required for the sleep data processing",
           "properties": {
             "name": {

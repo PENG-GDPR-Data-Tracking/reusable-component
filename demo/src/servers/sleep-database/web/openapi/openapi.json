@@ -49,7 +49,7 @@
             "title": "User",
             "type": "object",
             "x-processed": true,
-            "x-gdpr-data-type": "personal",
+            "x-gdpr-data-type": "special",
             "x-gdpr-data-reason": "required for sleep data processing",
             "properties": {
               "duration": {

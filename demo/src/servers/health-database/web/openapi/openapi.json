@@ -49,9 +49,9 @@
     "components": {
       "schemas": {
         "HealthData": {
-          "title": "HealthData",
+          "title": "personal",
           "type": "object",
-          "x-gdpr-data-type": "personal",
+          "x-gdpr-data-type": "special",
           "x-gdpr-data-reason": "used for anonymous statistics",
           "properties": {
             "healthindex": {
