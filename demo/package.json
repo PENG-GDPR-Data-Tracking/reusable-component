@@ -11,7 +11,16 @@
     "s4": "nodemon src/servers/sleep-database/index.ts",
     "s5": "nodemon src/servers/health-database/index.ts",
     "s6": "nodemon src/servers/statistics-server/index.ts",
-    "start": "concurrently --kill-others \"npm run c1\" \"npm run s1\" \"npm run s2\" \"npm run s3\" \"npm run s4\" \"npm run s5\" \"npm run s6\" "
+    "start": "concurrently --kill-others \"npm run c1\" \"npm run s1\" \"npm run s2\" \"npm run s3\" \"npm run s4\" \"npm run s5\" \"npm run s6\" ",
+    "b1": "ts-node src-benchmark/server-1-justexpress.ts",
+    "b1-artillery": "artillery quick --count 10 -n 20 http://localhost:8001",
+    "b1-benchmark": "concurrently \"npm run b1\" \"wait-on http://localhost:8001 && npm run b1-artillery\" ",
+    "b2": "ts-node src-benchmark/server-2-withzipkin.ts",
+    "b2-artillery": "artillery quick --count 10 -n 20 http://localhost:8002",
+    "b2-benchmark": "concurrently \"npm run b2\" \"wait-on http://localhost:8002 && npm run b2-artillery\" ",
+    "b3": "ts-node src-benchmark/server-3-gdprtracking.ts",
+    "b3-artillery": "artillery quick --count 10 -n 20 http://localhost:8003",
+    "b3-benchmark": "concurrently \"npm run b3\" \"wait-on http://localhost:8003 && npm run b3-artillery\" "
   },
   "author": "PEng Sose2020 Group 7",
   "license": "ISC",
@@ -32,8 +41,10 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.7",
     "@types/node": "^14.0.18",
+    "artillery": "^1.6.1",
     "concurrently": "^5.2.0",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "wait-on": "^5.1.0"
   }
 }
