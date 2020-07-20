@@ -1,6 +1,6 @@
 import { tracingNative } from '../opentelemerty';
 const SERVICE_NAME = 'client';
-const SERVICE_PORT = 3001;
+const SERVICE_PORT = process.env.PORT || 3001;
 const SERVICE_GDPR_TRACING_CONFIG = {
   serviceName: SERVICE_NAME,
   location: 'Europe',
@@ -25,9 +25,8 @@ app.use(express.static('src/client-1/web'), cors());
   { path: '/api/userData', remoteUrl: 'http://localhost:8001/api1/' },
   { path: '/api/sleepData', remoteUrl: 'http://localhost:8002/api1/' },
   { path: '/api/bodyHealthData', remoteUrl: 'http://localhost:8003/api1/' },
-].map(proxy => {
+].map((proxy) => {
   app.get(proxy.path, (req, res) => {
-
     // respond to the client
     res.send(`Response to path ${proxy.path} from ${SERVICE_NAME}`);
 
