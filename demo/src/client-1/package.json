@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "build": "tsc index.ts"
   },
   "author": "PEng Sose2020 Group 7",
   "license": "ISC",
@@ -16,16 +17,17 @@
     "@opentelemetry/plugin-express": "^0.8.0",
     "@opentelemetry/plugin-http": "^0.9.0",
     "@opentelemetry/tracing": "^0.9.0",
+    "@types/node": "^14.0.24",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
+    "opentelemetry-plugin-gdpr": "^1.0.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.6"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.7",
-    "@types/node": "^14.0.18",
     "artillery": "^1.6.1",
     "concurrently": "^5.2.0",
     "tslint": "^6.1.2",

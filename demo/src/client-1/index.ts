@@ -1,7 +1,7 @@
-import { tracingNative } from '../opentelemerty';
+import { tracingFullConfiguration, OpenTelemetryGdprPluginConfiguration } from 'opentelemetry-plugin-gdpr';
 const SERVICE_NAME = 'client';
 const SERVICE_PORT = process.env.PORT || 3001;
-const SERVICE_GDPR_TRACING_CONFIG = {
+const SERVICE_GDPR_TRACING_CONFIG: OpenTelemetryGdprPluginConfiguration = {
   serviceName: SERVICE_NAME,
   location: 'Europe',
   baseTTL: 0,
@@ -10,7 +10,7 @@ const SERVICE_GDPR_TRACING_CONFIG = {
   baseAutomatedDecisionMaking: false,
   basePurpose: 'Webserver for providing our WebApp',
 };
-tracingNative(SERVICE_GDPR_TRACING_CONFIG);
+tracingFullConfiguration(SERVICE_GDPR_TRACING_CONFIG);
 
 // don't know why, but opentelemetry express plugin works better when express is not yet imported
 // so we initalize tracking and then import express
