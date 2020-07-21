@@ -19,7 +19,7 @@ const cors = require('cors');
 const http = require('http');
 
 const app = express();
-app.use(express.static('src/client-1/web'), cors());
+app.use(express.static('./web'), cors());
 [
   { path: '/api/userData', remoteUrl: 'http://localhost:8001/api1/' },
   { path: '/api/sleepData', remoteUrl: 'http://localhost:8002/api1/' },
@@ -37,4 +37,4 @@ app.use(express.static('src/client-1/web'), cors());
 app.get('*', (req, res) => res.send(`That's it from ${SERVICE_NAME}.`));
 
 // app.listen(SERVICE_PORT, () => console.log(`${SERVICE_NAME} started at http://localhost:${SERVICE_PORT}`));
-app.listen(SERVICE_PORT, () => console.log(`http://localhost:${SERVICE_PORT}: ${SERVICE_NAME} started.`));
+app.listen(SERVICE_PORT, () => console.log(`${SERVICE_NAME} started at http://localhost:${SERVICE_PORT}`));
