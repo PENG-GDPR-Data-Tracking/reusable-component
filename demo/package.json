@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "c1": "nodemon src/client-1/index.ts",
+    "c1": "cd src/client-1 && npm install && nodemon index.ts",
     "s1": "nodemon src/servers/users-server/index.ts",
     "s2": "nodemon src/servers/sleep-preprocessing-server/index.ts",
     "s3": "nodemon src/servers/health-preprocessing-server/index.ts",
