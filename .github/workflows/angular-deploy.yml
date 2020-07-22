@@ -19,7 +19,7 @@ jobs:
         run: npm install
         working-directory: viusalizer-generator/devops-gdpr
       - name: Build
-        run: npm run build-prod
+        run: npm run build
         working-directory: viusalizer-generator/devops-gdpr
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
