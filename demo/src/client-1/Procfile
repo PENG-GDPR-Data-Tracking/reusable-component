@@ -1,1 +1,1 @@
-web: npm workspace web start
+web: npm workspace gdpr start
