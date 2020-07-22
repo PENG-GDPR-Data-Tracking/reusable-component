@@ -16,12 +16,10 @@ jobs:
         with:
           node-version: 12.x
       - name: Install Dependencies
-        run: | 
-         npm install
+        run: "npm install"
         working-directory: reusable-component/viusalizer-generator/devops-gdpr
       - name: Build
-        run: | 
-         npm run build-prod
+        run: "npm run build-prod"
         working-directory: reusable-component/viusalizer-generator/devops-gdpr
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
