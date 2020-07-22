@@ -33,7 +33,7 @@ import { Configuration } from '../configuration';
 
 @Injectable()
 export class DefaultService {
-  protected basePath = 'http://localhost:9411/api/v2';
+  protected basePath = 'https://gdpr-zipkin.sloppy.zone/api/v2';
   //   protected basePath = 'http://164.90.214.160:9411/api/v2';
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();

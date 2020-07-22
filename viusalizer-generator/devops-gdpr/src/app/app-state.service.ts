@@ -25,7 +25,9 @@ export class AppStateService {
           map((ans) => {
             return ans.body.map((trace) => {
               return trace.filter(
-                (span) => span.kind === 'CLIENT' || span.kind === 'SERVER'
+                (span) =>
+                  (span.kind === 'CLIENT' || span.kind === 'SERVER') &&
+                  span.tags['http.error_message'] == undefined
               );
             });
           }),
