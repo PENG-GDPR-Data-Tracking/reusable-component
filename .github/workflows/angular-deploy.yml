@@ -37,7 +37,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: dist
+          path: viusalizer-generator/devops-gdpr/dist
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
