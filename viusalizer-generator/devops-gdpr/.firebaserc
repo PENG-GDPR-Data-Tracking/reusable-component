@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "peng-722a7": {
+      "hosting": {
+        "devops-gdpr": [
+          "peng-722a7"
+        ]
+      }
+    }
+  }
+}
