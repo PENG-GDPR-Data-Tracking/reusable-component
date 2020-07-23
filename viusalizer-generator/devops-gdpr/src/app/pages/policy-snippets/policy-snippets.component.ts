@@ -30,7 +30,7 @@ export class PolicySnippetsComponent implements OnInit {
   public static getHostFromURL(url: string) {
     let split = new RegExp('^(.*:)//([A-Za-z0-9-.]+)(:[0-9]+)?(.*)$').exec(url);
     // Protocol + "//" + "host" + "port"
-    return split[1] + '//' + split[2] + (split[3] ? split[3] : '');
+    return 'https://' + split[2] + (split[3] ? split[3] : '');
   }
 
   public getProperties(object: Object) {
