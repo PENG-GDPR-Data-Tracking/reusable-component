@@ -1,3 +1,5 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+You can click on the server or requests for detailed information.
 <ngx-graph class="chart-container" [view]="[width, height]" layout="dagre" [curve]="curve" [links]="edges"
     [nodes]="nodes">
 

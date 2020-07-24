@@ -15,6 +15,7 @@ import { AppStateService } from 'src/app/app-state.service';
   styleUrls: ['./visualizer.component.scss'],
 })
 export class VisualizerComponent {
+  public loading = true;
   width: number;
   height: number;
   @HostListener('window:resize', ['$event'])
@@ -37,9 +38,10 @@ export class VisualizerComponent {
     private appState: AppStateService,
     public dialog: MatDialog
   ) {
+    this.height = window.innerHeight - 64;
+    this.width = window.innerWidth;
     this.appState.traces.subscribe((traces) => {
-      this.height = window.innerHeight - 64;
-      this.width = window.innerWidth;
+      this.loading = false;
       traces.forEach((trace) => {
         this.getEdgesAndNodesFromSpan(trace);
       });

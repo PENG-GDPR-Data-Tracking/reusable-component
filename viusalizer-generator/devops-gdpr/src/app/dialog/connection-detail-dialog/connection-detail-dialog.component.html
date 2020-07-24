@@ -6,6 +6,7 @@
     <p>Reason: {{reason}}</p>
 
     <p>Example Data:</p>
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <pre>{{requestData}}</pre>
 </mat-dialog-content>
 

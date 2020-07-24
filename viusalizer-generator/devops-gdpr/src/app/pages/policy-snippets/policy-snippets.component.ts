@@ -12,6 +12,7 @@ import { ListOfTraces } from 'src/app/zipkin';
   styleUrls: ['./policy-snippets.component.scss'],
 })
 export class PolicySnippetsComponent implements OnInit {
+  public loading = true;
   constructor(
     private httpClient: HttpClient,
     private appState: AppStateService
@@ -52,6 +53,7 @@ export class PolicySnippetsComponent implements OnInit {
           new Set([...this.endpoints.map((e) => e + '/openapi/openapi.json')])
         )
       ).subscribe((documents) => {
+        this.loading = false;
         let entities = documents.reduce((accumulator, currentDoc) => {
           return [...accumulator, ...this.getEntitiesFromSchema(currentDoc)];
         }, new Array<OpenAPIV3.ReferenceObject | OpenAPIV3.ArraySchemaObject | OpenAPIV3.NonArraySchemaObject>());

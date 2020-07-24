@@ -11,6 +11,7 @@ import { OpenAPIV3 } from 'openapi-types';
   styleUrls: ['./connection-detail-dialog.component.scss'],
 })
 export class ConnectionDetailDialogComponent implements OnInit {
+  public loading = true;
   public requestData: string = '';
   public category: string = '';
   public reason: string = '';
@@ -27,6 +28,7 @@ export class ConnectionDetailDialogComponent implements OnInit {
         ) + '/openapi/openapi.json'
       )
       .subscribe((document) => {
+        this.loading = false;
         this.category = (document.components.schemas[
           Object.keys(document.components.schemas)[0]
         ] as any)['x-gdpr-data-type'];
