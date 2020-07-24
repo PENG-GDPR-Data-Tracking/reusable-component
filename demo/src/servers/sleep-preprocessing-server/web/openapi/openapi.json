@@ -50,14 +50,12 @@
         "type": "object",
         "x-processed": false,
         "x-gdpr-data-type": "personal",
-        "x-gdpr-data-reason": "required for sleep data processing",
         "properties": {
           "duration": {
             "type": "number",
             "description": "duration of the sleep in minutes",
             "x-gdpr-data-category": "personal",
             "x-gpdr-data-type": "sensitive",
-            "x-gdpr-data-reason": "used for the sleep data processing",
             "x-gdpr-data-subject-category": "customer",
             "x-gdpr-data-non-provided-consequences": "sleep processing not possible"
           },
@@ -69,7 +67,6 @@
             "format": "int64",
             "x-gdpr-data-category": "special",
             "x-gpdr-data-type": "sensitive",
-            "x-gdpr-data-reason": "used for the sleep data processing & evaluation",
             "x-gdpr-data-subject-category": "customer",
             "x-gdpr-data-non-provided-consequences": "sleep processing less accurate, no correlation to subjective quality possible"
           },
@@ -81,7 +78,6 @@
             },
             "x-gdpr-data-category": "special",
             "x-gpdr-data-type": "sensitive",
-            "x-gdpr-data-reason": "used for the sleep data processing",
             "x-gdpr-data-subject-category": "customer",
             "x-gdpr-data-non-provided-consequences": "sleep processing not possible"
           }

@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/meta/core",
-    "$id": "https://tu-berlin.de/insertURL/meta",
+    "$id": "https://tu-berlin.de/pengdevops/meta",
     "$vocabulary": {
         "https://json-schema.org/draft/2019-09/vocab/core": true,
         "https://json-schema.org/draft/2019-09/vocab/applicator": true,
@@ -21,20 +21,18 @@
             "$comment": "Non-empty fragments not allowed.",
             "pattern": "^[^#]*#?$"
         },
-		"gdprReason": {
-            "type": "string"
-        },
-        "gdprDataType": {
+        "x-gpdr-data-type": {
             "type": "string",
 			"propertyNames": {"enum": ["identifier", "quasi-identifier", "sensitive", "non-sensitive"]}
         },
-        "gdprCategory": {
+        "x-gpdr-data-category": {
             "type": "string",
             "propertyNames": {"enum": ["special", "personal", "anonymous"]}
         },
-        "gdprNotProvidedConsequence": {
+        "x-gpdr-data-subject-category": {
             "type": "string"
         }
     },
-    "required": ["gdprReason", "gdprDataType", "gdprCategory"]
+    "required": ["gdprDataType", "gdprCategory"]
 }
+

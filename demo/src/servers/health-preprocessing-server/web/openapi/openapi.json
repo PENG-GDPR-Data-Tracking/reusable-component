@@ -52,14 +52,12 @@
           "title": "RAWHealthData",
           "type": "object",
           "x-gdpr-data-type": "special",
-          "x-gdpr-data-reason": "required for the sleep data processing",
           "properties": {
             "name": {
               "type": "string",
               "description": "The name of the User",
               "x-gdpr-data-category": "personal",
               "x-gpdr-data-type": "identifier",
-              "x-gdpr-data-reason": "used for identification and addressing the user",
               "x-gdpr-data-subject-category": "customer",
               "x-gdpr-data-non-provided-consequences": "user cannot be addressed directly"
             },
@@ -70,7 +68,6 @@
               "description": "weight of the user in kg\n",
               "x-gdpr-data-category": "special",
               "x-gpdr-data-type": "sensitive",
-              "x-gdpr-data-reason": "used for the sleep data processing and health scores",
               "x-gdpr-data-subject-category": "customer",
               "x-gdpr-data-non-provided-consequences": "sleep processing & health score less accurate"
             },
@@ -81,7 +78,6 @@
               "maximum": 100,
               "x-gdpr-data-category": "special",
               "x-gpdr-data-type": "sensitive",
-              "x-gdpr-data-reason": "used for the sleep data processing and health scores",
               "x-gdpr-data-subject-category": "customer",
               "x-gdpr-data-non-provided-consequences": "sleep processing & health score less accurate"
             },
@@ -90,9 +86,8 @@
               "description": "users muscle percentage\n",
               "minimum": 0,
               "maximum": 100,
-              "x-gdpr-data-category": "special",
+              "x-gdpr-data-type": "special",
               "x-gpdr-data-type": "sensitive",
-              "x-gdpr-data-reason": "used for the sleep data processing and health scores",
               "x-gdpr-data-subject-category": "customer",
               "x-gdpr-data-non-provided-consequences": "sleep processing & health score less accurate"
               }

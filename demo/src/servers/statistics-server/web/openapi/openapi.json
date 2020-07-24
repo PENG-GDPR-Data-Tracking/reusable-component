@@ -38,7 +38,6 @@
             "type": "object",
             "x-processed": false,
             "x-gdpr-data-type": "anonymous",
-            "x-gdpr-data-reason": "scientific and marketing purposes",
             "properties": {
               "duration": {
                 "type": "number",
@@ -52,7 +51,6 @@
                 "format": "int64",
                 "x-gdpr-data-category": "anonymous",
                 "x-gpdr-data-type": "non-sensitive",
-                "x-gdpr-data-reason": "used for anonymous data evaluation for scientific and marketing purposes",
                 "x-gdpr-data-subject-category": "customer",
                 "x-gdpr-data-non-provided-consequences": "data evaluation not possible"
               }
